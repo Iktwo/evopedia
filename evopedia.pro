@@ -14,6 +14,7 @@ TARGET = evopedia
 TEMPLATE = app
 include(src.pri)
 symbian:include(bzlib.pri)
+include(src/qmlapplicationviewer/qmlapplicationviewer.pri)
 
 OTHER_FILES += \
     qtc_packaging/debian_harmattan/rules \
@@ -25,7 +26,21 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/changelog \
     resources/harmattan/evopedia.svg \
     resources/harmattan/evopedia80.png \
-    resources/harmattan/evopedia64.png
+    resources/harmattan/evopedia64.png \
+    src/ui/SearchPage.qml \
+    src/ui/mapWindow.qml \
+    src/ui/mainwindow.qml \
+    src/ui/dumpSettings.qml \
+    src/ui/archiveDetailsDialog.qml 
+
+HEADERS += \
+    src/bzlib.h
+
+
+
+
+
+
 
 
 

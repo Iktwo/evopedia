@@ -28,7 +28,7 @@
 #include <QDebug>
 #include <QUrl>
 
-#include <bzlib.h>
+#include "bzlib.h"
 
 #include "title.h"
 #include "bzreader.h"

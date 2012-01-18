@@ -22,7 +22,9 @@
 
 #include <QTranslator>
 #include <QLibraryInfo>
+#include <QtGui/QApplication>
 
+#include "qmlapplicationviewer/qmlapplicationviewer.h"
 #include "mainwindow.h"
 #include "utils.h"
 
@@ -57,11 +59,19 @@ EvopediaApplication::~EvopediaApplication()
     delete m_mainwindow;
 }
 
-int main(int argc, char *argv[])
+Q_DECL_EXPORT main(int argc, char *argv[])
 {
     /* initialize random number generator */
     randomNumber(2);
 
-    EvopediaApplication app(argc, argv);
-    return app.exec();
+    EvopediaApplication evoapp(argc,argv);
+    QScopedPointer<EvopediaApplication> app(&evoapp);
+//    QScopedPointer<QApplication> app(createApplication(argc, argv));
+    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
+
+    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+    viewer->setMainQmlFile(QLatin1String("src/ui/mainwindow.qml"));
+    viewer->showExpanded();
+
+    return app->exec();
 }

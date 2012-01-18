@@ -24,7 +24,7 @@
 #include <QByteArray>
 #include <QFile>
 
-#include <bzlib.h>
+#include "bzlib.h"
 
 class BZReader
 {
