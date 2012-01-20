@@ -43,6 +43,7 @@ struct QmlJsDebuggingEnabler
     }
 };
 
+
 // Execute code in constructor before first QDeclarativeEngine is instantiated
 static QmlJsDebuggingEnabler enableDebuggingHelper;
 
@@ -114,6 +115,17 @@ QmlApplicationViewer::QmlApplicationViewer(QDeclarativeView *view, QWidget *pare
 QmlApplicationViewer::~QmlApplicationViewer()
 {
     delete d;
+}
+
+// hack to enable accessing rootContext from C++
+QDeclarativeContext *QmlApplicationViewer::rootContext()
+{
+    return d->view->rootContext();
+}
+
+void QmlApplicationViewer::installEventFilter( QObject *filterObj)
+{
+    d->view->installEventFilter(filterObj);
 }
 
 QmlApplicationViewer *QmlApplicationViewer::create()

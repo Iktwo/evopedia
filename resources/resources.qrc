@@ -2,6 +2,16 @@
     <qresource prefix="/transtbl">
         <file>transtbl.dat</file>
     </qresource>
+    <qresource prefix="/meego">
+        <file>harmattan/evopedia.svg</file>
+        <file>harmattan/evopedia64.png</file>
+        <file>harmattan/evopedia80.png</file>
+        <file>harmattan/qml/archiveDetailsDialog.qml</file>
+        <file>harmattan/qml/dumpSettings.qml</file>
+        <file>harmattan/qml/mainwindow.qml</file>
+        <file>harmattan/qml/mapWindow.qml</file>
+        <file>harmattan/qml/SearchPage.qml</file>
+    </qresource>
     <qresource prefix="/web">
         <file>footer.html</file>
         <file>header.html</file>

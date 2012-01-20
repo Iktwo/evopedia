@@ -23,6 +23,7 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QtGui/QApplication>
+#include <QtDeclarative>
 
 #include "qmlapplicationviewer/qmlapplicationviewer.h"
 #include "mainwindow.h"
@@ -45,12 +46,12 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
 
 
     m_evopedia = new Evopedia(this);
-    m_mainwindow = new MainWindow();
+//    m_mainwindow = new MainWindow();
 
 #if defined(Q_WS_S60)
-    m_mainwindow->showMaximized();
+//    m_mainwindow->showMaximized();
 #else
-    m_mainwindow->show();
+//    m_mainwindow->show();
 #endif
 }
 
@@ -69,8 +70,13 @@ Q_DECL_EXPORT main(int argc, char *argv[])
 //    QScopedPointer<QApplication> app(createApplication(argc, argv));
     QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
 
+    QDeclarativeContext *ctxt = viewer->rootContext();
+    // I might have to pass ctxt to EvopediaApplication, and on to m_mainwindow and/or m_evopedia
+//    ctxt->setContextProperty();
+
     viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    viewer->setMainQmlFile(QLatin1String("src/ui/mainwindow.qml"));
+//    viewer->setMainQmlFile(QLatin1String("src/ui/mainwindow.qml"));
+    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
     viewer->showExpanded();
 
     return app->exec();

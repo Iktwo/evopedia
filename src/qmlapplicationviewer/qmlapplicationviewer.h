@@ -36,6 +36,8 @@ public:
     void setOrientation(ScreenOrientation orientation);
 
     void showExpanded();
+    QDeclarativeContext *rootContext();
+    void installEventFilter(QObject *filterObj);
 
 private:
     explicit QmlApplicationViewer(QDeclarativeView *view, QWidget *parent);

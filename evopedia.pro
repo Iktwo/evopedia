@@ -31,10 +31,22 @@ OTHER_FILES += \
     src/ui/mapWindow.qml \
     src/ui/mainwindow.qml \
     src/ui/dumpSettings.qml \
-    src/ui/archiveDetailsDialog.qml 
+    src/qml/SearchPage.qml \
+    src/qml/mapWindow.qml \
+    src/qml/mainwindow.qml \
+    src/qml/dumpSettings.qml \
+    src/qml/archiveDetailsDialog.qml \
+    resources/harmattan/qml/SearchPage.qml \
+    resources/harmattan/qml/mapWindow.qml \
+    resources/harmattan/qml/mainwindow.qml \
+    resources/harmattan/qml/dumpSettings.qml \
+    resources/harmattan/qml/archiveDetailsDialog.qml
 
 HEADERS += \
     src/bzlib.h
+
+
+
 
 
 
