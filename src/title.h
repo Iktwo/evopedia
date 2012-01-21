@@ -28,6 +28,7 @@ class Title : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ getReadableName)
+    Q_PROPERTY(quint32 length READ getArticleLength)
 
 public:
     Title();

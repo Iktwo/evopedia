@@ -19,13 +19,17 @@
  */
 
 #include <QVector>
-
+#include <QHash>
 #include "titlelistmodel.h"
 
 
 TitleListModel::TitleListModel(QObject *parent) :
     QAbstractListModel(parent)
 {
+    QHash<int,QByteArray> roles;
+    roles[NameRole]="name";
+    roles[LengthRole]="length";
+    setRoleNames(roles);
 }
 
 int TitleListModel::rowCount(const QModelIndex &parent) const
@@ -69,6 +73,12 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
 
     if (role == Qt::DisplayRole)
         return titles[index.row()]->getReadableName();
+
+    if (role == NameRole)
+        return titles[index.row()]->getReadableName();
+
+    if (role == LengthRole)
+        return titles[index.row()]->getArticleLength();
 
     return QVariant();
 }

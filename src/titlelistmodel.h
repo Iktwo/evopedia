@@ -30,11 +30,24 @@
 class TitleListModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int count READ rowCount)
+
 public:
+
+    enum TitleRoles {
+        NameRole = Qt::UserRole +1,
+        LengthRole = Qt::UserRole +2
+    };
+
     TitleListModel(QObject *parent = 0);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     const Title* getTitleAt(const QModelIndex &index) const;
+    Q_INVOKABLE const Title* get(int index) {
+        if(index<titles.size())
+            return titles.at(index);
+        else return NULL;
+    }
 
 protected:
     bool canFetchMore(const QModelIndex &parent) const;
