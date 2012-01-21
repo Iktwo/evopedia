@@ -36,7 +36,7 @@ public:
 
     Evopedia *evopedia() { return m_evopedia; }
 
-    void openArticle(const Title &title)
+    void openArticle(const Title *title)
     {
         QDesktopServices::openUrl(m_evopedia->getArticleUrl(title));
     }

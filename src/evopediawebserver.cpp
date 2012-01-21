@@ -206,11 +206,11 @@ void EvopediaWebServer::redirectRandom(QTcpSocket *socket, const QStringList &pa
         outputHeader(socket, "404");
         return;
     }
-    Title t = backend->getRandomTitle();
-    if (t.getName().isNull()) {
+    const Title *t = backend->getRandomTitle();
+    if (t->getName().isNull()) {
         outputHeader(socket, "404");
     } else {
-        QUrl redirectTo(QString("/wiki/%1/%2").arg(backend->getLanguage()).arg(t.getName()));
+        QUrl redirectTo(QString("/wiki/%1/%2").arg(backend->getLanguage()).arg(t->getName()));
         outputRedirect(socket, redirectTo);
     }
 }
@@ -248,16 +248,16 @@ void EvopediaWebServer::outputWikiPage(QTcpSocket *socket, const QStringList &pa
             return;
         }
         foreach (LocalArchive *b, evopedia->getArchiveManager()->getDefaultLocalArchives()) {
-            const Title t = b->getTitleFromPath(pathParts);
-            if (t.getName().isEmpty())
+            const Title *t = b->getTitleFromPath(pathParts);
+            if (t->getName().isEmpty())
                 continue;
-            QUrl redirectTo(QString("/wiki/%1/%2").arg(b->getLanguage()).arg(t.getName()));
+            QUrl redirectTo(QString("/wiki/%1/%2").arg(b->getLanguage()).arg(t->getName()));
             outputRedirect(socket, redirectTo);
             return;
         }
         outputHeader(socket, "404");
     } else {
-        const Title t = backend->getTitleFromPath(pathParts);
+        const Title *t = backend->getTitleFromPath(pathParts);
         QByteArray articleData = backend->getArticle(t);
         if (articleData.isNull()) {
             QString lastPart = pathParts[pathParts.length() - 1];
@@ -315,10 +315,10 @@ void EvopediaWebServer::outputSearchResult(QTcpSocket *socket, const QString &qu
             data += tr("Nothing found.").toUtf8();
         } else {
             for (int titles = 0; it.hasNext() && titles < 50; titles ++) {
-                Title t(it.next());
+                const Title *t=it.next();
                 data += QString("<a href=\"%1\" target=\"_top\">%2</a><br/>")
                         .arg(evopedia->getArticleUrl(t).toEncoded(),
-                             t.getReadableName()).toUtf8();
+                             t->getReadableName()).toUtf8();
             }
         }
     } else {

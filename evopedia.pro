@@ -45,7 +45,8 @@ OTHER_FILES += \
 HEADERS += \
     src/bzlib.h
 
-
+#RESOURCES += \
+#    resources/resources.qml
 
 
 

@@ -33,7 +33,7 @@ class Evopedia : public QObject
     Q_OBJECT
 public:
     explicit Evopedia(QObject *parent=0);
-    QUrl getArticleUrl(const Title &t) const;
+    QUrl getArticleUrl(const Title *t) const;
     void setNetworkUse(int use);
     bool networkConnectionAllowed();
     ArchiveManager *getArchiveManager() const { return archiveManager; }

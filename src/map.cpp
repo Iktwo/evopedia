@@ -431,7 +431,7 @@ void ArticleOverlay::mouseClicked(const QPoint &tile, const QPoint &pixelPos)
 
     qSort(titleDistances.begin(), titleDistances.end(), GeoTitle::nearerThan);
 
-    QList<Title> titleList;
+    QList<Title*> titleList;
     foreach (GeoTitleDistance t, titleDistances) {
         titleList += t.first.getTitle();
     }
@@ -439,12 +439,12 @@ void ArticleOverlay::mouseClicked(const QPoint &tile, const QPoint &pixelPos)
     showNearTitleList(titleList);
 }
 
-void ArticleOverlay::showNearTitleList(const QList<Title> &list)
+void ArticleOverlay::showNearTitleList(const QList<Title*> &list)
 {
     if (list.isEmpty()) return;
 
     if (list.length() == 1) {
-        QMessageBox msgbox(QMessageBox::NoIcon, "Article", list[0].getReadableName(),
+        QMessageBox msgbox(QMessageBox::NoIcon, "Article", list[0]->getReadableName(),
                            QMessageBox::Open | QMessageBox::Cancel);
         if (msgbox.exec() == QMessageBox::Open) {
             (static_cast<EvopediaApplication *>(qApp))->openArticle(list[0]);
@@ -464,7 +464,7 @@ void ArticleOverlay::showNearTitleList(const QList<Title> &list)
         /* TODO1 Use "infinite list" and show every article (not only those stored in the titles hash) */
 
         for (int i = 0; i < list.length(); i ++) {
-            QListWidgetItem *item = new QListWidgetItem(list[i].getReadableName(), &titleList);
+            QListWidgetItem *item = new QListWidgetItem(list[i]->getReadableName(), &titleList);
             item->setData(Qt::UserRole, i);
             if (i == 0)
                 titleList.setCurrentItem(item);
@@ -474,7 +474,7 @@ void ArticleOverlay::showNearTitleList(const QList<Title> &list)
             QList<QListWidgetItem *> selItems = titleList.selectedItems();
             if (selItems.empty()) return;
 
-            Title t = list[selItems[0]->data(Qt::UserRole).toInt()];
+            Title *t = list[selItems[0]->data(Qt::UserRole).toInt()];
             (static_cast<EvopediaApplication *>(qApp))->openArticle(t);
         }
     }

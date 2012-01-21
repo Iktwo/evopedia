@@ -21,10 +21,14 @@
 #ifndef TITLE_H
 #define TITLE_H
 
+#include <QObject>
 #include <QString>
 
-class Title
+class Title : public QObject
 {
+    Q_OBJECT
+    Q_PROPERTY(QString name READ getReadableName)
+
 public:
     Title();
     Title(const QByteArray &encodedTitle, const QString &language);
@@ -35,6 +39,12 @@ public:
     quint32 getBlockStart() const { return blockStart; }
     quint32 getBlockOffset() const { return blockOffset; }
     quint32 getArticleLength() const { return articleLength; }
+    void setName(const QString& n) {name = n;}
+    void setLanguage(const QString& l) {language=l;}
+    void setFileNr(quint8 fn) {fileNr=fn;}
+    void setBlockStart(quint32 bs) {blockStart=bs;}
+    void setBlockOffset(quint32 bo) {blockOffset=bo;}
+    void setArticleLength(quint32 al) {articleLength=al;}
 private:
     QString name;
     QString language;

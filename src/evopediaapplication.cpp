@@ -63,21 +63,21 @@ EvopediaApplication::~EvopediaApplication()
 Q_DECL_EXPORT main(int argc, char *argv[])
 {
     /* initialize random number generator */
-    randomNumber(2);
 
+    randomNumber(2);
     EvopediaApplication evoapp(argc,argv);
     QScopedPointer<EvopediaApplication> app(&evoapp);
-//    QScopedPointer<QApplication> app(createApplication(argc, argv));
-    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
 
+    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
     QDeclarativeContext *ctxt = viewer->rootContext();
     // I might have to pass ctxt to EvopediaApplication, and on to m_mainwindow and/or m_evopedia
-//    ctxt->setContextProperty();
+//    ctxt->setContextProperty("",);
 
     viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 //    viewer->setMainQmlFile(QLatin1String("src/ui/mainwindow.qml"));
     viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
     viewer->showExpanded();
+
 
     return app->exec();
 }

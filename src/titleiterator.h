@@ -32,14 +32,14 @@ public:
     TitleIterator();
     TitleIterator(QIODevice *device, const QString &prefix=QString(), const QString &language=QString());
     bool hasNext() const;
-    const Title next();
+    const Title* next();
 private:
     void checkHasNext();
 
     QString language;
     QIODevice *device;
     QString prefix;
-    Title nextTitle;
+    Title* nextTitle;
 };
 
 #endif // TITLEITERATOR_H

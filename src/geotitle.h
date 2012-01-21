@@ -31,8 +31,20 @@ class GeoTitle
 {
 public:
     GeoTitle() {}
-    GeoTitle(Title title, QPointF coordinate) : title(title), coordinate(coordinate) {}
-    const Title &getTitle() const { return title; }
+//    GeoTitle(Title title, QPointF coordinate) : title(title), coordinate(coordinate) {}
+    GeoTitle(Title *mtitle, QPointF coordinate) : coordinate(coordinate)
+    {
+        title=mtitle;
+
+//        title.setArticleLength(mtitle.getArticleLength());
+//        title.setBlockOffset(mtitle.getBlockOffset());
+//        title.setBlockStart(mtitle.getBlockStart());
+//        title.setFileNr(mtitle.getFileNr());
+//        title.setLanguage(mtitle.getLanguage());
+//        title.setName(mtitle.getName());
+    }
+//    const Title &getTitle() const { return title; }
+    Title* getTitle() const { return title; }
     const QPointF &getCoordinate() const { return coordinate; }
 
     static bool nearerThan(const QPair<GeoTitle, float> &t1, const QPair<GeoTitle, float> &t2)
@@ -41,7 +53,7 @@ public:
     }
 
 private:
-    Title title;
+    Title *title;
     QPointF coordinate;
 };
 

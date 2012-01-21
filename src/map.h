@@ -140,7 +140,7 @@ private slots:
 
 private:
     GeoTitleList getTitles(const QRectF &rect, int maxTitles);
-    void showNearTitleList(const QList<Title> &t);
+    void showNearTitleList(const QList<Title*> &t);
 
     bool enabled;
     QHash<ZoomTile, GeoTitleList> titles;

@@ -43,7 +43,7 @@ bool TitleListModel::canFetchMore(const QModelIndex &parent) const
 void TitleListModel::setTitleIterator(TitleIterator iter)
 {
     titleIter = iter;
-    titles = QList<Title>();
+    titles = QList<const Title*>();
 
     reset();
 }
@@ -51,7 +51,7 @@ void TitleListModel::setTitleIterator(TitleIterator iter)
 void TitleListModel::fetchMore(const QModelIndex &parent)
 {
     Q_UNUSED(parent);
-    QList<Title> newTitles;
+    QList<const Title*> newTitles;
     while (titleIter.hasNext() && newTitles.size() < 50) {
         newTitles += titleIter.next();
     }
@@ -68,18 +68,18 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     if (role == Qt::DisplayRole)
-        return titles[index.row()].getReadableName();
+        return titles[index.row()]->getReadableName();
 
     return QVariant();
 }
 
-const Title TitleListModel::getTitleAt(const QModelIndex &index) const
+const Title* TitleListModel::getTitleAt(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return Title();
+        return NULL;
 
     if (index.row() >= titles.size() || index.row() < 0)
-        return Title();
+        return NULL;
 
     return titles[index.row()];
 }

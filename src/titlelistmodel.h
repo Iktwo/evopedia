@@ -34,7 +34,7 @@ public:
     TitleListModel(QObject *parent = 0);
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    const Title getTitleAt(const QModelIndex &index) const;
+    const Title* getTitleAt(const QModelIndex &index) const;
 
 protected:
     bool canFetchMore(const QModelIndex &parent) const;
@@ -48,7 +48,7 @@ public slots:
 
 private:
     TitleIterator titleIter;
-    QList<Title> titles;
+    QList<const Title*> titles;
 
 };
 
