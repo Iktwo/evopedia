@@ -26,9 +26,4 @@ PageStackWindow {
             MenuItem { text: qsTr("Sample menu item") }
         }
     }
-
-    Rectangle {
-        width: 100
-        height: 62
-    }
 }

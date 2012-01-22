@@ -12,6 +12,7 @@
         <file>harmattan/qml/mapWindow.qml</file>
         <file>harmattan/qml/SearchPage.qml</file>
         <file>harmattan/qml/TitlesDelegate.qml</file>
+        <file>harmattan/qml/ArchiveDelegate.qml</file>
     </qresource>
     <qresource prefix="/web">
         <file>footer.html</file>

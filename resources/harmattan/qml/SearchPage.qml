@@ -2,6 +2,7 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 Page {
+    id: searchPage
     tools: commonTools
 
 //    Rectangle {
@@ -9,6 +10,7 @@ Page {
 //        anchors.fill: parent
 //        color: "red"
 //    }
+
     ListView {
         id: titleView
         anchors.fill: parent

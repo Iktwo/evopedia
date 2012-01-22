@@ -41,13 +41,15 @@ OTHER_FILES += \
     resources/harmattan/qml/mainwindow.qml \
     resources/harmattan/qml/dumpSettings.qml \
     resources/harmattan/qml/archiveDetailsDialog.qml \
-    resources/harmattan/qml/TitlesDelegate.qml
+    resources/harmattan/qml/TitlesDelegate.qml \
+    resources/harmattan/qml/ArchiveDelegate.qml
 
 HEADERS += \
     src/bzlib.h
 
 #RESOURCES += \
 #    resources/resources.qml
+
 
 
 
