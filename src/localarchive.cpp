@@ -213,7 +213,7 @@ const Title* LocalArchive::getTitle(const QString &title)
         }
     }
 //    return Title();
-    return NULL;
+    return new Title();
 }
 
 const QByteArray LocalArchive::getArticle(const QString &title)
@@ -269,8 +269,8 @@ const Title* LocalArchive::getRandomTitle()
 
     QFile titles(titleFile);
     if (!titles.open(QIODevice::ReadOnly))
-        return NULL;
 //        return Title();
+        return new Title();
 
     int pos = randomNumber(titles.size());
     titles.seek(pos);

@@ -86,10 +86,12 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
 const Title* TitleListModel::getTitleAt(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return NULL;
+//        return NULL;
+        return new Title();
 
     if (index.row() >= titles.size() || index.row() < 0)
-        return NULL;
+//        return NULL;
+        return new Title();
 
     return titles[index.row()];
 }

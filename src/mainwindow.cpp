@@ -32,6 +32,7 @@
 #include "utils.h"
 #include "defines.h"
 
+//MainWindow::MainWindow(QDeclarativeContext *ctxt, QWidget *parent) :
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Evopedia),
@@ -43,7 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     foreach (LocalArchive *b, evopedia->getArchiveManager()->getDefaultLocalArchives())
        ui->languageChooser->addItem(b->getLanguage());
+    /// change ui to QML
     ui->listView->setModel(titleListModel);
+//    ctxt->setContextProperty("titlesModel", titleListModel);
 
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),

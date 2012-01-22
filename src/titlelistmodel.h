@@ -46,7 +46,7 @@ public:
     Q_INVOKABLE const Title* get(int index) {
         if(index<titles.size())
             return titles.at(index);
-        else return NULL;
+        else return new Title();
     }
 
 protected:

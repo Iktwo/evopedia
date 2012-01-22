@@ -23,6 +23,7 @@
 
 #include <QApplication>
 #include <QDesktopServices>
+#include <QtDeclarative>
 
 #include "evopedia.h"
 #include "mainwindow.h"
@@ -31,6 +32,7 @@ class EvopediaApplication : public QApplication
 {
     Q_OBJECT
 public:
+//    explicit EvopediaApplication(int &argc, char **argv, QDeclarativeContext* ctxt);
     explicit EvopediaApplication(int &argc, char **argv);
     ~EvopediaApplication();
 

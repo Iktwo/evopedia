@@ -29,6 +29,7 @@
 #include "mainwindow.h"
 #include "utils.h"
 
+//EvopediaApplication::EvopediaApplication(int &argc, char **argv, QDeclarativeContext *ctxt) :
 EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
     QApplication(argc, argv)
 {
@@ -46,7 +47,8 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
 
 
     m_evopedia = new Evopedia(this);
-//    m_mainwindow = new MainWindow();
+//    m_mainwindow = new MainWindow(ctxt);
+    m_mainwindow = new MainWindow();
 
 #if defined(Q_WS_S60)
 //    m_mainwindow->showMaximized();
@@ -65,6 +67,8 @@ Q_DECL_EXPORT main(int argc, char *argv[])
     /* initialize random number generator */
 
     randomNumber(2);
+
+//    EvopediaApplication evoapp(argc,argv,NULL);
     EvopediaApplication evoapp(argc,argv);
     QScopedPointer<EvopediaApplication> app(&evoapp);
 
@@ -77,6 +81,7 @@ Q_DECL_EXPORT main(int argc, char *argv[])
 //    viewer->setMainQmlFile(QLatin1String("src/ui/mainwindow.qml"));
     viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
     viewer->showExpanded();
+
 
 
     return app->exec();
