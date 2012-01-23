@@ -1,10 +1,12 @@
 [Desktop Entry]
+Encoding=UTF-8
 Version=1.0
 Type=Application
-Encoding=UTF-8
-Name=Evopedia
-Comment=Offline Wikipedia Reader
-Exec=/usr/bin/evopedia
-Categories=Utility
-Icon=evopedia-64x64
 Terminal=false
+Name=Evopedia
+Exec=/usr/bin/evopedia
+Icon=/usr/share/icons/hicolor/80x80/apps/evopedia.png
+Comment=Offline Wikipedia Reader
+X-Window-Icon=
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
