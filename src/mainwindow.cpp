@@ -25,12 +25,14 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QAbstractButton>
+#include <QtDeclarative>
 
 #include "evopediaapplication.h"
 #include "mapwindow.h"
 #include "dumpsettings.h"
 #include "utils.h"
 #include "defines.h"
+#include "qmlapplicationviewer/qmlapplicationviewer.h"
 
 //MainWindow::MainWindow(QDeclarativeContext *ctxt, QWidget *parent) :
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,6 +40,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::Evopedia),
     titleListModel(new TitleListModel(this))
 {
+//    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
+    QmlApplicationViewer *viewer(QmlApplicationViewer::create());
+    QDeclarativeContext *ctxt = viewer->rootContext();
+//    ctxt->setContextProperty("",);
+
+    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+    viewer->showExpanded();
+
     titleListModel->setTitleIterator(TitleIterator());
 
     ui->setupUi(this);
@@ -46,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
        ui->languageChooser->addItem(b->getLanguage());
     /// change ui to QML
     ui->listView->setModel(titleListModel);
-//    ctxt->setContextProperty("titlesModel", titleListModel);
+    ctxt->setContextProperty("titlesModel", titleListModel);
 
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),

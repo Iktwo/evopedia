@@ -69,18 +69,16 @@ Q_DECL_EXPORT main(int argc, char *argv[])
     randomNumber(2);
 
 //    EvopediaApplication evoapp(argc,argv,NULL);
-    EvopediaApplication evoapp(argc,argv);
-    QScopedPointer<EvopediaApplication> app(&evoapp);
+    EvopediaApplication *evoapp=new EvopediaApplication(argc,argv);
+    QScopedPointer<EvopediaApplication> app(evoapp);
 
-    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
-    QDeclarativeContext *ctxt = viewer->rootContext();
-    // I might have to pass ctxt to EvopediaApplication, and on to m_mainwindow and/or m_evopedia
+//    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
+//    QDeclarativeContext *ctxt = viewer->rootContext();
 //    ctxt->setContextProperty("",);
 
-    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-//    viewer->setMainQmlFile(QLatin1String("src/ui/mainwindow.qml"));
-    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
-    viewer->showExpanded();
+//    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+//    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+//    viewer->showExpanded();
 
 
 
