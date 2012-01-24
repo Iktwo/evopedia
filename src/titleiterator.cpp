@@ -47,7 +47,8 @@ void TitleIterator::checkHasNext()
 {
     if (device == 0 || device->atEnd()) {
 //        nextTitle = Title();
-        nextTitle = new Title();
+//        nextTitle = new Title();
+        nextTitle = NULL;
     } else {
         QByteArray line = device->readLine();
         nextTitle = new Title(line.left(line.length() - 1), language);
@@ -55,7 +56,7 @@ void TitleIterator::checkHasNext()
             QString tn = LocalArchive::normalize(nextTitle->getName());
             if (!tn.startsWith(prefix))
 //                nextTitle = Title();
-                nextTitle = new Title();
+                nextTitle = NULL;
         }
     }
 }

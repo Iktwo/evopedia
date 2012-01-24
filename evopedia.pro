@@ -42,7 +42,8 @@ OTHER_FILES += \
     resources/harmattan/qml/dumpSettings.qml \
     resources/harmattan/qml/archiveDetailsDialog.qml \
     resources/harmattan/qml/TitlesDelegate.qml \
-    resources/harmattan/qml/ArchiveDelegate.qml
+    resources/harmattan/qml/ArchiveDelegate.qml \
+    resources/harmattan/qml/NoArchiveMsgBox.qml
 
 HEADERS += \
     src/bzlib.h
@@ -69,3 +70,4 @@ contains(MEEGO_EDITION,harmattan) {
     icon.path = /usr/share/icons/hicolor/80x80/apps
     INSTALLS += icon
 }
+

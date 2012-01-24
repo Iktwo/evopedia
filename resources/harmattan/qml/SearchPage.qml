@@ -12,7 +12,7 @@ Page {
 //    }
 
     ListView {
-        id: titleView
+        id: titlesView
         anchors.fill: parent
         model: titlesModel
         delegate: TitlesDelegate{}
