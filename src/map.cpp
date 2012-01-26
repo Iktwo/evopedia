@@ -431,7 +431,7 @@ void ArticleOverlay::mouseClicked(const QPoint &tile, const QPoint &pixelPos)
 
     qSort(titleDistances.begin(), titleDistances.end(), GeoTitle::nearerThan);
 
-    QList<Title*> titleList;
+    QList<QSharedPointer<Title> > titleList;
     foreach (GeoTitleDistance t, titleDistances) {
         titleList += t.first.getTitle();
     }
@@ -439,7 +439,7 @@ void ArticleOverlay::mouseClicked(const QPoint &tile, const QPoint &pixelPos)
     showNearTitleList(titleList);
 }
 
-void ArticleOverlay::showNearTitleList(const QList<Title*> &list)
+void ArticleOverlay::showNearTitleList(const QList<QSharedPointer<Title> > &list)
 {
     if (list.isEmpty()) return;
 
@@ -474,7 +474,7 @@ void ArticleOverlay::showNearTitleList(const QList<Title*> &list)
             QList<QListWidgetItem *> selItems = titleList.selectedItems();
             if (selItems.empty()) return;
 
-            Title *t = list[selItems[0]->data(Qt::UserRole).toInt()];
+            QSharedPointer<Title> t = list[selItems[0]->data(Qt::UserRole).toInt()];
             (static_cast<EvopediaApplication *>(qApp))->openArticle(t);
         }
     }

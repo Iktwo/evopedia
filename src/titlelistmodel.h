@@ -22,6 +22,7 @@
 #define TITLELISTMODEL_H
 
 #include <QAbstractListModel>
+#include <QSharedPointer>
 #include <QFile>
 
 #include "title.h"
@@ -40,13 +41,14 @@ public:
     };
 
     TitleListModel(QObject *parent = 0);
+    ~TitleListModel();
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    const Title* getTitleAt(const QModelIndex &index) const;
-    Q_INVOKABLE const Title* get(int index) {
+    QSharedPointer<Title> getTitleAt(const QModelIndex &index) const;
+    Q_INVOKABLE QSharedPointer<Title> get(int index) {
         if(index<titles.size())
             return titles.at(index);
-        else return new Title();
+        else return QSharedPointer<Title>();
     }
 
 protected:
@@ -61,7 +63,7 @@ public slots:
 
 private:
     TitleIterator titleIter;
-    QList<const Title*> titles;
+    QList<QSharedPointer<Title> > titles;
 
 };
 

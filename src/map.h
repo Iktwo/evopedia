@@ -36,6 +36,7 @@
 #include <QPainter>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
+#include <QSharedPointer>
 
 #include "flickable.h"
 #include "tilefetcher.h"
@@ -140,7 +141,7 @@ private slots:
 
 private:
     GeoTitleList getTitles(const QRectF &rect, int maxTitles);
-    void showNearTitleList(const QList<Title*> &t);
+    void showNearTitleList(const QList<QSharedPointer<Title> > &t);
 
     bool enabled;
     QHash<ZoomTile, GeoTitleList> titles;

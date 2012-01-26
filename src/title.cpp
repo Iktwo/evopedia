@@ -25,6 +25,12 @@
 Title::Title()
     : fileNr(0), blockStart(0), blockOffset(0), articleLength(0)
 {
+//    name="";
+//    language="";
+//    fileNr=0;
+//    blockStart=0;
+//    blockOffset=0;
+//    articleLength=0;
 }
 
 Title::Title(const QByteArray &encodedTitle, const QString &language)
@@ -32,7 +38,7 @@ Title::Title(const QByteArray &encodedTitle, const QString &language)
 {
     if (encodedTitle.length() < 15)
         return;
-
+    encTitle=encodedTitle;
     QByteArray escapeData(encodedTitle.left(2));
     QByteArray positionData(encodedTitle.mid(2, 13));
 

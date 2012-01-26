@@ -28,10 +28,10 @@
 #include <QStringList>
 #include <QFile>
 #include <QHash>
+#include <QSharedPointer>
 
 #include "titleiterator.h"
 #include "geotitle.h"
-
 #include "archive.h"
 
 class LocalArchive : public Archive
@@ -47,13 +47,13 @@ public:
     TitleIterator getTitlesWithPrefix(const QString &prefix);
     QList<GeoTitle> getTitlesInCoords(const QRectF &rect, int maxTitles=-1, bool *complete=0);
     const QByteArray getArticle(const QString &title);
-    const Title* getTitle(const QString &title);
-    const QByteArray getArticle(const Title *t);
-    const Title* getTitleFromPath(const QStringList &pathParts);
-    QUrl getOrigUrl(const Title *title) const;
+    QSharedPointer<Title> getTitle(const QString &title);
+    const QByteArray getArticle(QSharedPointer<Title> t);
+    QSharedPointer<Title> getTitleFromPath(const QStringList &pathParts);
+    QUrl getOrigUrl(const QSharedPointer<Title> title) const;
     const QString &getOrigUrl() const { return dumpOrigURL; }
     const QByteArray getMathImage(const QByteArray &hexHash) const;
-    const Title* getRandomTitle();
+    QSharedPointer<Title> getRandomTitle();
 
     int getNumArticles() const { return dumpNumArticles.toInt(); }
     bool isReadable() const { return readable; }
@@ -71,7 +71,7 @@ private:
                                                int maxTitles);
     bool checkExistenceOfDumpfiles();
 
-    const Title* getTitleAtOffset(quint32 offset);
+    QSharedPointer<Title> getTitleAtOffset(quint32 offset);
 
     QString errorMessage;
 

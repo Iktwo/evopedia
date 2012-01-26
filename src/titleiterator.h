@@ -23,6 +23,7 @@
 
 #include <QIODevice>
 #include <QString>
+#include <QSharedPointer>
 
 #include "title.h"
 
@@ -32,14 +33,14 @@ public:
     TitleIterator();
     TitleIterator(QIODevice *device, const QString &prefix=QString(), const QString &language=QString());
     bool hasNext() const;
-    const Title* next();
+    QSharedPointer<Title> next();
 private:
     void checkHasNext();
 
     QString language;
     QIODevice *device;
     QString prefix;
-    Title* nextTitle;
+    QSharedPointer<Title> nextTitle;
 };
 
 #endif // TITLEITERATOR_H

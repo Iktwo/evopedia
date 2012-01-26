@@ -53,7 +53,7 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
 #if defined(Q_WS_S60)
 //    m_mainwindow->showMaximized();
 #else
-//    m_mainwindow->show();
+    m_mainwindow->show();
 #endif
 }
 

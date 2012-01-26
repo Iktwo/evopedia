@@ -24,7 +24,7 @@
 #include <QApplication>
 #include <QDesktopServices>
 #include <QtDeclarative>
-
+#include <QSharedPointer>
 #include "evopedia.h"
 #include "mainwindow.h"
 
@@ -38,7 +38,7 @@ public:
 
     Evopedia *evopedia() { return m_evopedia; }
 
-    void openArticle(const Title *title)
+    void openArticle(const QSharedPointer<Title> title)
     {
         QDesktopServices::openUrl(m_evopedia->getArticleUrl(title));
     }

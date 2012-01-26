@@ -31,7 +31,7 @@ Evopedia::Evopedia(QObject *parent)
     webServer->setObjectName("evopediaWebserver");
 }
 
-QUrl Evopedia::getArticleUrl(const Title *t) const
+QUrl Evopedia::getArticleUrl(const QSharedPointer<Title> t) const
 {
     /* TODO1 direct link to title (not via name); include date? */
     return QUrl(QString("http://127.0.0.1:%1/wiki/%2/%3")

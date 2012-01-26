@@ -38,32 +38,31 @@ TitleIterator::TitleIterator(QIODevice *device_ini, const QString &prefix, const
 
 bool TitleIterator::hasNext() const
 {
-    if(nextTitle!=NULL)
-        return !nextTitle->getName().isNull();
-    else return true;
+    if(nextTitle==NULL)
+        return false;
+
+    return !nextTitle->getName().isNull();
 }
 
 void TitleIterator::checkHasNext()
 {
     if (device == 0 || device->atEnd()) {
-//        nextTitle = Title();
-//        nextTitle = new Title();
-        nextTitle = NULL;
+        nextTitle =QSharedPointer<Title>();
     } else {
         QByteArray line = device->readLine();
-        nextTitle = new Title(line.left(line.length() - 1), language);
+        nextTitle = QSharedPointer<Title>(new Title(line.left(line.length() - 1), language));
         if (!prefix.isNull()) {
             QString tn = LocalArchive::normalize(nextTitle->getName());
             if (!tn.startsWith(prefix))
-//                nextTitle = Title();
-                nextTitle = NULL;
+                nextTitle = QSharedPointer<Title>();
         }
     }
 }
 
-const Title* TitleIterator::next()
+QSharedPointer<Title> TitleIterator::next()
 {
-    const Title *t = nextTitle;
+    QSharedPointer<Title> t;
+    t = QSharedPointer<Title>(new Title(nextTitle->encTitle, language));
     checkHasNext();
     return t;
 }

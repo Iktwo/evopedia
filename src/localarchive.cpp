@@ -160,8 +160,8 @@ TitleIterator LocalArchive::getTitlesWithPrefix(const QString &prefix)
             hi = mid;
             continue;
         }
-        Title *title=new Title(line.left(line.length() - 1), QString());
-        const QString nt(normalizedTitles ? normalize(title->getName()) : title->getName());
+        Title title(line.left(line.length() - 1), QString());
+        const QString nt(normalizedTitles ? normalize(title.getName()) : title.getName());
         if (nt < prefix_normalized) {
             lo = aftermid - 1;
         } else {
@@ -201,34 +201,43 @@ QList<GeoTitle> LocalArchive::getTitlesInCoords(const QRectF &rect, int maxTitle
     return list;
 }
 
-const Title* LocalArchive::getTitle(const QString &title)
+QSharedPointer<Title> LocalArchive::getTitle(const QString &title)
 {
     /* TODO1 not very efficient: we should be able to stop once the
      * normalized title in the list is longer than our normalized title */
     TitleIterator it = getTitlesWithPrefix(title);
     while (it.hasNext()) {
-        const Title *t=it.next();
-        if (t->getName() == title) {
-            return t;
+        QSharedPointer<Title> t=it.next();
+        if(!t->getName().isNull())
+        {
+            if (t->getName() == title) {
+                return t;
+            }
         }
+        else qDebug() << "LocalArchive::getTitle has a NULL pointer fuckup" << endl;
     }
-//    return Title();
-    return new Title();
+    return QSharedPointer<Title>();
 }
 
 const QByteArray LocalArchive::getArticle(const QString &title)
 {
-    const Title *t = getTitle(title);
-    if (t->getName().isEmpty()) {
-        return QByteArray();
-    } else {
-        return getArticle(t);
+    QSharedPointer<Title> t = getTitle(title);
+    if(!t->getName().isNull())
+    {
+        if (t->getName().isEmpty()) {
+            return QByteArray();
+        } else {
+            const QByteArray article=getArticle(t);
+            return article;
+        }
     }
+    else
+        return QByteArray();
 }
 
-const QByteArray LocalArchive::getArticle(const Title *t)
+const QByteArray LocalArchive::getArticle(QSharedPointer<Title> t)
 {
-    const Title *title=t;
+    QSharedPointer<Title> title=t;
     if (title->getFileNr() == 0xff) { /* redirect */
         if (title->getBlockStart() == 0xffffffL) {
             return QByteArray(); /* invalid redirect */
@@ -244,13 +253,15 @@ const QByteArray LocalArchive::getArticle(const Title *t)
         return QByteArray();
 
     BZReader reader;
-    return reader.readAt(f,
+    QByteArray tempArray= reader.readAt(f,
                          title->getBlockStart(),
                          title->getBlockOffset(),
                          title->getArticleLength());
+//    delete title;
+    return tempArray;
 }
 
-const Title* LocalArchive::getTitleFromPath(const QStringList &pathParts)
+QSharedPointer<Title> LocalArchive::getTitleFromPath(const QStringList &pathParts)
 {
     static QRegExp endpattern("(_[0-9a-f]{4})?(\\.html(\\.redir)?)?$", Qt::CaseInsensitive);
     QString t;
@@ -263,26 +274,24 @@ const Title* LocalArchive::getTitleFromPath(const QStringList &pathParts)
     return getTitle(t);
 }
 
-const Title* LocalArchive::getRandomTitle()
+QSharedPointer<Title> LocalArchive::getRandomTitle()
 {
     /* long titles are preferred by this method, oh well... */
 
     QFile titles(titleFile);
     if (!titles.open(QIODevice::ReadOnly))
-//        return Title();
-        return new Title();
+        return QSharedPointer<Title>();
 
     int pos = randomNumber(titles.size());
     titles.seek(pos);
     titles.readLine();
     if (titles.atEnd())
         titles.seek(0);
-    Title *title = new Title(titles.readLine(), language);
-//    return &Title(titles.readLine(), language);
+    QSharedPointer<Title> title = QSharedPointer<Title>(new Title(titles.readLine(), language));
     return title;
 }
 
-QUrl LocalArchive::getOrigUrl(const Title *title) const
+QUrl LocalArchive::getOrigUrl(const QSharedPointer<Title> title) const
 {
     return QUrl(dumpOrigURL + title->getName());
 }
@@ -375,7 +384,7 @@ void LocalArchive::getTitlesInCoordsInt(QList<GeoTitle> &list, QFile &titles, QF
             if (!targetRect.contains(c))
                 continue;
             titles.seek(title_pos);
-            list += GeoTitle(new Title(titles.readLine(), language), c);
+            list += GeoTitle(QSharedPointer<Title>(new Title(titles.readLine(), language)), c);
             if (maxTitles >= 0 && list.length() >= maxTitles)
                 return;
         }
@@ -402,12 +411,12 @@ const QByteArray LocalArchive::getMathImage(const QByteArray &hexHash) const
 }
 
 
-const Title* LocalArchive::getTitleAtOffset(quint32 offset)
+QSharedPointer<Title> LocalArchive::getTitleAtOffset(quint32 offset)
 {
     QFile titles(titleFile);
     titles.open(QIODevice::ReadOnly);
     titles.seek(offset);
-    Title *title=new Title(titles.readLine(), language);
+    QSharedPointer<Title> title=QSharedPointer<Title>(new Title(titles.readLine(), language));
     return title;
 }
 

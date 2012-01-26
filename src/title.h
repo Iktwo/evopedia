@@ -35,7 +35,10 @@ public:
     Title(const QByteArray &encodedTitle, const QString &language);
     const QString &getName() const { return name; }
     const QString &getLanguage() const { return language; }
-    const QString getReadableName() const { return QString(name).replace('_', ' '); }
+    const QString getReadableName() const
+    {
+            return QString(name).replace('_', ' ');
+    }
     quint8 getFileNr() const { return fileNr; }
     quint32 getBlockStart() const { return blockStart; }
     quint32 getBlockOffset() const { return blockOffset; }
@@ -46,6 +49,7 @@ public:
     void setBlockStart(quint32 bs) {blockStart=bs;}
     void setBlockOffset(quint32 bo) {blockOffset=bo;}
     void setArticleLength(quint32 al) {articleLength=al;}
+    QByteArray encTitle;
 private:
     QString name;
     QString language;

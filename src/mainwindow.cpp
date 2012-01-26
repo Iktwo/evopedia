@@ -41,9 +41,11 @@ MainWindow::MainWindow(QWidget *parent) :
     titleListModel(new TitleListModel(this))
 {
 //    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
-    QmlApplicationViewer *viewer(QmlApplicationViewer::create());
-    QDeclarativeContext *rootCtxt = viewer->rootContext();
-    QObject *QMLObject = viewer->rootObject();
+
+//    QmlApplicationViewer *viewer(QmlApplicationViewer::create());
+//    QDeclarativeContext *rootCtxt = viewer->rootContext();
+//    QObject *QMLObject = viewer->rootObject();
+
 //    ctxt->setContextProperty("",);
 
 
@@ -57,12 +59,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView->setModel(titleListModel);
 //    QObject* QMLtitlesView = QMLObject->findChild<QObject*>("titlesView");
 //    QDeclarativeContext *titlesCtxt=rootCtxt->findChild<QDeclarativeContext*>("titlesView");
-    rootCtxt->setContextProperty("titlesModel", titleListModel);
+
+//    rootCtxt->setContextProperty("titlesModel", titleListModel);
+
 //    titlesCtxt->setContextProperty("titlesModel", titleListModel);
 //    QMLtitlesView->setProperty("titlesModel",titleListModel);
-    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
-    viewer->showExpanded();
+
+//    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+//    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+//    viewer->showExpanded();
 
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),

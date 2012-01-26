@@ -206,13 +206,14 @@ void EvopediaWebServer::redirectRandom(QTcpSocket *socket, const QStringList &pa
         outputHeader(socket, "404");
         return;
     }
-    const Title *t = backend->getRandomTitle();
+    QSharedPointer<Title> t = backend->getRandomTitle();
     if (t->getName().isNull()) {
         outputHeader(socket, "404");
     } else {
         QUrl redirectTo(QString("/wiki/%1/%2").arg(backend->getLanguage()).arg(t->getName()));
         outputRedirect(socket, redirectTo);
     }
+//    delete t;
 }
 
 void EvopediaWebServer::outputMathImage(QTcpSocket *socket, const QStringList &pathParts)
@@ -248,16 +249,20 @@ void EvopediaWebServer::outputWikiPage(QTcpSocket *socket, const QStringList &pa
             return;
         }
         foreach (LocalArchive *b, evopedia->getArchiveManager()->getDefaultLocalArchives()) {
-            const Title *t = b->getTitleFromPath(pathParts);
+            QSharedPointer<Title> t = b->getTitleFromPath(pathParts);
             if (t->getName().isEmpty())
+            {
+//                delete t;
                 continue;
+            }
             QUrl redirectTo(QString("/wiki/%1/%2").arg(b->getLanguage()).arg(t->getName()));
+//            delete t;
             outputRedirect(socket, redirectTo);
             return;
         }
         outputHeader(socket, "404");
     } else {
-        const Title *t = backend->getTitleFromPath(pathParts);
+        QSharedPointer<Title> t = backend->getTitleFromPath(pathParts);
         QByteArray articleData = backend->getArticle(t);
         if (articleData.isNull()) {
             QString lastPart = pathParts[pathParts.length() - 1];
@@ -302,6 +307,7 @@ void EvopediaWebServer::outputWikiPage(QTcpSocket *socket, const QStringList &pa
             data += "</div>";
         data += getResource(":/web/footer.html");
         outputResponse(socket, data, "text/html; charset=\"utf-8\"", false);
+//        delete t;
     }
 }
 
@@ -315,10 +321,11 @@ void EvopediaWebServer::outputSearchResult(QTcpSocket *socket, const QString &qu
             data += tr("Nothing found.").toUtf8();
         } else {
             for (int titles = 0; it.hasNext() && titles < 50; titles ++) {
-                const Title *t=it.next();
+                QSharedPointer<Title> t=it.next();
                 data += QString("<a href=\"%1\" target=\"_top\">%2</a><br/>")
                         .arg(evopedia->getArticleUrl(t).toEncoded(),
                              t->getReadableName()).toUtf8();
+//                delete t;
             }
         }
     } else {

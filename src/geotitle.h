@@ -24,7 +24,7 @@
 #include <QPointF>
 #include <QDataStream>
 #include <QPair>
-
+#include <QSharedPointer>
 #include "title.h"
 
 class GeoTitle
@@ -32,7 +32,7 @@ class GeoTitle
 public:
     GeoTitle() {}
 //    GeoTitle(Title title, QPointF coordinate) : title(title), coordinate(coordinate) {}
-    GeoTitle(Title *mtitle, QPointF coordinate) : coordinate(coordinate)
+    GeoTitle(QSharedPointer<Title> mtitle, QPointF coordinate) : coordinate(coordinate)
     {
         title=mtitle;
 
@@ -44,7 +44,7 @@ public:
 //        title.setName(mtitle.getName());
     }
 //    const Title &getTitle() const { return title; }
-    Title* getTitle() const { return title; }
+    QSharedPointer<Title> getTitle() const { return title; }
     const QPointF &getCoordinate() const { return coordinate; }
 
     static bool nearerThan(const QPair<GeoTitle, float> &t1, const QPair<GeoTitle, float> &t2)
@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    Title *title;
+    QSharedPointer<Title> title;
     QPointF coordinate;
 };
 

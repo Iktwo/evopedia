@@ -32,6 +32,12 @@ TitleListModel::TitleListModel(QObject *parent) :
     setRoleNames(roles);
 }
 
+TitleListModel::~TitleListModel()
+{
+//    qDeleteAll(titles.begin(),titles.end());
+//    titles.clear();
+}
+
 int TitleListModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
@@ -47,7 +53,7 @@ bool TitleListModel::canFetchMore(const QModelIndex &parent) const
 void TitleListModel::setTitleIterator(TitleIterator iter)
 {
     titleIter = iter;
-    titles = QList<const Title*>();
+    titles = QList<QSharedPointer<Title> >();
 
     reset();
 }
@@ -55,7 +61,7 @@ void TitleListModel::setTitleIterator(TitleIterator iter)
 void TitleListModel::fetchMore(const QModelIndex &parent)
 {
     Q_UNUSED(parent);
-    QList<const Title*> newTitles;
+    QList<QSharedPointer<Title> > newTitles;
     while (titleIter.hasNext() && newTitles.size() < 50) {
         newTitles += titleIter.next();
     }
@@ -75,7 +81,15 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
         return titles[index.row()]->getReadableName();
 
     if (role == NameRole)
-        return titles[index.row()]->getReadableName();
+    {
+//        if(index.row()<titles.size())
+//        {
+//            int i=index.row();
+            return titles[index.row()]->getReadableName();
+//        }
+//        else
+//            return QVariant();
+    }
 
     if (role == LengthRole)
         return titles[index.row()]->getArticleLength();
@@ -83,15 +97,15 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-const Title* TitleListModel::getTitleAt(const QModelIndex &index) const
+QSharedPointer<Title> TitleListModel::getTitleAt(const QModelIndex &index) const
 {
     if (!index.isValid())
-//        return NULL;
-        return new Title();
+//        return QSharedPointer<Title>();
+        return QSharedPointer<Title>(new Title());
 
     if (index.row() >= titles.size() || index.row() < 0)
-//        return NULL;
-        return new Title();
+//        return QSharedPointer<Title>();
+        return QSharedPointer<Title>(new Title());
 
     return titles[index.row()];
 }
