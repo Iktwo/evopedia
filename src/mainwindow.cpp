@@ -26,6 +26,7 @@
 #include <QPushButton>
 #include <QAbstractButton>
 #include <QtDeclarative>
+#include <QDeclarativeView>
 
 #include "evopediaapplication.h"
 #include "mapwindow.h"
@@ -48,6 +49,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    ctxt->setContextProperty("",);
 
+    QDeclarativeView view;
+    view.setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+    QDeclarativeContext *rootCtxt = view.rootContext();
+
 
     titleListModel->setTitleIterator(TitleIterator());
 
@@ -60,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QObject* QMLtitlesView = QMLObject->findChild<QObject*>("titlesView");
 //    QDeclarativeContext *titlesCtxt=rootCtxt->findChild<QDeclarativeContext*>("titlesView");
 
-//    rootCtxt->setContextProperty("titlesModel", titleListModel);
+    rootCtxt->setContextProperty("titlesModel", titleListModel);
 
 //    titlesCtxt->setContextProperty("titlesModel", titleListModel);
 //    QMLtitlesView->setProperty("titlesModel",titleListModel);
@@ -68,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 //    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
 //    viewer->showExpanded();
+    view.show();
 
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),

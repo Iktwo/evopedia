@@ -81,15 +81,7 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
         return titles[index.row()]->getReadableName();
 
     if (role == NameRole)
-    {
-//        if(index.row()<titles.size())
-//        {
-//            int i=index.row();
-            return titles[index.row()]->getReadableName();
-//        }
-//        else
-//            return QVariant();
-    }
+        return titles[index.row()]->getReadableName();
 
     if (role == LengthRole)
         return titles[index.row()]->getArticleLength();
