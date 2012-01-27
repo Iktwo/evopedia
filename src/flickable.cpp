@@ -88,6 +88,7 @@ Flickable::Flickable()
 
 Flickable::~Flickable()
 {
+    delete d->ticker;
     delete d;
 }
 

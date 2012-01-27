@@ -68,7 +68,8 @@ SlippyMap::SlippyMap(QObject *parent)
     width(400),
     height(300),
     zoom(15),
-    m_centerPos(16384, 10900)
+    m_centerPos(16384, 10900),
+    visible(true)
 {
     m_emptyTile = QPixmap(tdim, tdim);
     m_emptyTile.fill(Qt::lightGray);
@@ -80,11 +81,11 @@ SlippyMap::SlippyMap(QObject *parent)
     m_manager.setCache(cache);
     */
 
-    tileFetcher = new TileFetcher();
+    tileFetcher = QSharedPointer<TileFetcher>(new TileFetcher());
     tileFetcher->start(QThread::LowPriority);
-    tileFetcher->moveToThread(tileFetcher);
-    connect(tileFetcher, SIGNAL(tileLoaded(int,QPoint,QImage)), SLOT(tileLoaded(int,QPoint,QImage)));
-    connect(this, SIGNAL(tileNeeded(int,QPoint)), tileFetcher, SLOT(fetchTile(int,QPoint)));
+    tileFetcher->moveToThread(tileFetcher.data());
+    connect(tileFetcher.data(), SIGNAL(tileLoaded(int,QPoint,QImage)), SLOT(tileLoaded(int,QPoint,QImage)));
+    connect(this, SIGNAL(tileNeeded(int,QPoint)), tileFetcher.data(), SLOT(fetchTile(int,QPoint)));
 }
 
 void SlippyMap::invalidate()
@@ -326,16 +327,16 @@ QPointF SlippyMap::project(QPointF lnglat, int zoom)
     return QPointF(x * qreal(1 << zoom), y * qreal(1 << zoom));
 }
 
-ArticleOverlay::ArticleOverlay(SlippyMap *parent)
-    : QObject(parent),
+ArticleOverlay::ArticleOverlay(QSharedPointer<SlippyMap> parent)
+    : QObject(parent.data()),
     enabled(true),
     wikipediaIcon(":/map_icons/wikipedia.png"),
     slippyMap(parent)
 
 {
-    connect(parent, SIGNAL(invalidate(QRect)), SLOT(invalidate(QRect)));
-    connect(parent, SIGNAL(tileRendered(QPainter*,QPoint,QRect)), SLOT(tileRendered(QPainter*,QPoint,QRect)));
-    connect(parent, SIGNAL(mouseClicked(QPoint,QPoint)), SLOT(mouseClicked(QPoint,QPoint)));
+    connect(parent.data(), SIGNAL(invalidate(QRect)), SLOT(invalidate(QRect)));
+    connect(parent.data(), SIGNAL(tileRendered(QPainter*,QPoint,QRect)), SLOT(tileRendered(QPainter*,QPoint,QRect)));
+    connect(parent.data(), SIGNAL(mouseClicked(QPoint,QPoint)), SLOT(mouseClicked(QPoint,QPoint)));
     Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),

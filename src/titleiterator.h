@@ -31,14 +31,17 @@ class TitleIterator
 {
 public:
     TitleIterator();
-    TitleIterator(QIODevice *device, const QString &prefix=QString(), const QString &language=QString());
+//    ~TitleIterator();
+//    TitleIterator(QIODevice *device, const QString &prefix=QString(), const QString &language=QString());
+    TitleIterator(QSharedPointer<QIODevice> device, const QString &prefix=QString(), const QString &language=QString());
     bool hasNext() const;
     QSharedPointer<Title> next();
 private:
     void checkHasNext();
 
     QString language;
-    QIODevice *device;
+//    QIODevice *device;
+    QSharedPointer<QIODevice> device;
     QString prefix;
     QSharedPointer<Title> nextTitle;
 };

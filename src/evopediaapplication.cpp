@@ -46,6 +46,14 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
     installTranslator(qtTranslator);
 
 
+//    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
+//    QDeclarativeContext *ctxt = viewer->rootContext();
+//    ctxt->setContextProperty("",);
+
+//    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
+//    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+//    viewer->showExpanded();
+
     m_evopedia = new Evopedia(this);
 //    m_mainwindow = new MainWindow(ctxt);
     m_mainwindow = new MainWindow();
@@ -68,19 +76,8 @@ Q_DECL_EXPORT main(int argc, char *argv[])
 
     randomNumber(2);
 
-//    EvopediaApplication evoapp(argc,argv,NULL);
     EvopediaApplication *evoapp=new EvopediaApplication(argc,argv);
     QScopedPointer<EvopediaApplication> app(evoapp);
-
-//    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
-//    QDeclarativeContext *ctxt = viewer->rootContext();
-//    ctxt->setContextProperty("",);
-
-//    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-//    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
-//    viewer->showExpanded();
-
-
 
     return app->exec();
 }

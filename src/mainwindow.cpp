@@ -49,9 +49,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    ctxt->setContextProperty("",);
 
-    QDeclarativeView view;
-    view.setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
-    QDeclarativeContext *rootCtxt = view.rootContext();
+//    QDeclarativeView view;
+//    QDeclarativeContext *rootCtxt = view.rootContext();
+//    QObject *QMLObject = view.rootObject();
 
 
     titleListModel->setTitleIterator(TitleIterator());
@@ -65,15 +65,19 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QObject* QMLtitlesView = QMLObject->findChild<QObject*>("titlesView");
 //    QDeclarativeContext *titlesCtxt=rootCtxt->findChild<QDeclarativeContext*>("titlesView");
 
-    rootCtxt->setContextProperty("titlesModel", titleListModel);
-
+//    rootCtxt->setContextProperty("titlesModel", titleListModel);
+//    view.setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+//    QObject* titlesView = QMLObject->findChild<QObject*>("titlesView");
+//    if(titlesView)
+//        titlesView->setProperty("titlesModel", titleListModel);
 //    titlesCtxt->setContextProperty("titlesModel", titleListModel);
+
 //    QMLtitlesView->setProperty("titlesModel",titleListModel);
 
 //    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
 //    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
 //    viewer->showExpanded();
-    view.show();
+//    view.show();
 
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),

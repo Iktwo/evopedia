@@ -22,6 +22,7 @@
 #define FLICKABLEMAP_H
 
 #include <QWidget>
+#include <QSharedPointer>
 
 #include "flickable.h"
 #include "map.h"
@@ -62,8 +63,8 @@ private slots:
     void updateMap(const QRect &r);
 
 private:
-    SlippyMap *map;
-    ArticleOverlay *articleOverlay;
+    QSharedPointer<SlippyMap> map;
+    QSharedPointer<ArticleOverlay> articleOverlay;
 };
 
 #endif // FLICKABLEMAP_H

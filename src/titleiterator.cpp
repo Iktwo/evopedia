@@ -30,7 +30,14 @@ TitleIterator::TitleIterator()
     checkHasNext();
 }
 
-TitleIterator::TitleIterator(QIODevice *device_ini, const QString &prefix, const QString &language)
+//TitleIterator::~TitleIterator()
+//{
+//    if(device!=NULL)
+//        delete device;
+//}
+
+//TitleIterator::TitleIterator(QIODevice *device_ini, const QString &prefix, const QString &language)
+TitleIterator::TitleIterator(QSharedPointer<QIODevice> device_ini, const QString &prefix, const QString &language)
     : language(language), device(device_ini), prefix(LocalArchive::normalize(prefix))
 {
     checkHasNext();

@@ -26,10 +26,10 @@ FlickableMap::FlickableMap(QWidget *parent) :
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
 
-    map = new SlippyMap(this);
-    connect(map, SIGNAL(updated(QRect)), SLOT(updateMap(QRect)));
+    map = QSharedPointer<SlippyMap>(new SlippyMap(this));
+    connect(map.data(), SIGNAL(updated(QRect)), SLOT(updateMap(QRect)));
 
-    articleOverlay = new ArticleOverlay(map);
+    articleOverlay = QSharedPointer<ArticleOverlay>(new ArticleOverlay(map));
 
     setMouseTracking(true);
     Flickable::setAcceptMouseClick(this);

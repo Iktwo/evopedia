@@ -132,7 +132,7 @@ bool LocalArchive::checkExistenceOfDumpfiles()
 
 TitleIterator LocalArchive::getTitlesWithPrefix(const QString &prefix)
 {
-    QFile *titles = new QFile(titleFile);
+    QSharedPointer<QFile> titles = QSharedPointer<QFile>(new QFile(titleFile));
     if (!titles->open(QIODevice::ReadOnly))
         return TitleIterator();
 

@@ -52,7 +52,7 @@ class SlippyMap: public QObject
     int zoom;
     bool visible;
 
-    TileFetcher *tileFetcher;
+    QSharedPointer<TileFetcher> tileFetcher;
 
     QPointF m_centerPos; /* in tiles */
     QPoint m_topLeftOffset; /* pixals */
@@ -110,7 +110,7 @@ class ArticleOverlay: public QObject
     Q_OBJECT
 
 public:
-    ArticleOverlay(SlippyMap *parent);
+    ArticleOverlay(QSharedPointer<SlippyMap> parent);
     bool isComplete();
     bool isEnabled() { return enabled; }
 
@@ -146,7 +146,7 @@ private:
     bool enabled;
     QHash<ZoomTile, GeoTitleList> titles;
     QPixmap wikipediaIcon;
-    SlippyMap *slippyMap;
+    QSharedPointer<SlippyMap> slippyMap;
 };
 
 #endif // MAP_H
