@@ -99,7 +99,15 @@ OTHER_FILES += \
         resources/map.png \
         resources/main.css \
         resources/magnify-clip.png \
-        resources/footer.html
+        resources/footer.html \
+    src/qml/TitlesDelegate.qml \
+    src/qml/SearchPage.qml \
+    src/qml/NoArchiveMsgBox.qml \
+    src/qml/mapWindow.qml \
+    src/qml/mainwindow.qml \
+    src/qml/dumpSettings.qml \
+    src/qml/archiveDetailsDialog.qml \
+    src/qml/ArchiveDelegate.qml
 
 RESOURCES += \
         resources/resources.qrc \
@@ -159,3 +167,4 @@ unix {
   iconxpm.path = $$DATADIR/pixmaps
   iconxpm.files += resources/evopedia-64x64.png
 }
+

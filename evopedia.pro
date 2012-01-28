@@ -27,32 +27,18 @@ OTHER_FILES += \
     resources/harmattan/evopedia.svg \
     resources/harmattan/evopedia80.png \
     resources/harmattan/evopedia64.png \
-    src/ui/SearchPage.qml \
-    src/ui/mapWindow.qml \
-    src/ui/mainwindow.qml \
-    src/ui/dumpSettings.qml \
-    src/qml/SearchPage.qml \
-    src/qml/mapWindow.qml \
-    src/qml/mainwindow.qml \
-    src/qml/dumpSettings.qml \
-    src/qml/archiveDetailsDialog.qml \
-    resources/harmattan/qml/SearchPage.qml \
-    resources/harmattan/qml/mapWindow.qml \
-    resources/harmattan/qml/mainwindow.qml \
-    resources/harmattan/qml/dumpSettings.qml \
-    resources/harmattan/qml/archiveDetailsDialog.qml \
-    resources/harmattan/qml/TitlesDelegate.qml \
-    resources/harmattan/qml/ArchiveDelegate.qml \
-    resources/harmattan/qml/NoArchiveMsgBox.qml
 
 HEADERS += \
     src/bzlib.h
 
-#RESOURCES += \
-#    resources/resources.qml
 
 contains(MEEGO_EDITION,harmattan) {
     icon.files = evopedia.png
     icon.path = /usr/share/icons/hicolor/80x80/apps
     INSTALLS += icon
 }
+
+RESOURCES += \
+    src/qml/qml.qrc \
+#    resources/resources.qml
+

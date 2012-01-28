@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ArchiveDelegate.qml</file>
+        <file>ArchiveDetailsPage.qml</file>
+        <file>DumpSettingsPage.qml</file>
+        <file>Main.qml</file>
+        <file>MapPage.qml</file>
+        <file>NoArchiveMsgPage.qml</file>
+        <file>SearchPage.qml</file>
+        <file>TitlesDelegate.qml</file>
+    </qresource>
+</RCC>
