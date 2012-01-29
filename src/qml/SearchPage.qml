@@ -8,11 +8,15 @@ Page {
     ListView {
         id: titlesView
         anchors.fill: parent
-//        model: titlesModel
-//        model: xmlModel
-        model: XmlTestModel { }
+
+        model: titlesModel
+        delegate: Text { text: title } //+ ": " + url }
+
+//        model: XmlTestModel { }
+//        delegate: Text { text: title + ": " + url }
+
 //        delegate: TitlesDelegate { }
-        delegate: Text { text: title + ": " + url }
+
 //        MouseArea {
 //            id: mouseArea
 //            anchors.fill: parent

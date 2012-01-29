@@ -23,6 +23,7 @@
 
 #include <QMainWindow>
 #include <QList>
+#include <QSharedPointer>
 
 #include "localarchive.h"
 
@@ -46,7 +47,9 @@ private slots:
 
 private:
     Ui::DumpSettings *ui;
-    Evopedia *evopedia;
+//    Evopedia *evopedia;
+    QSharedPointer<Evopedia> evopedia;
+
 };
 
 #endif // DUMPSETTINGS_H

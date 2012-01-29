@@ -5,11 +5,12 @@ PageStackWindow {
     id: rootWindow
 //    property int pageMargin: 16
 
-    initialPage: SearchPage { }
+//    initialPage: SearchPage { }
+    initialPage: searchPage
 
-//    SearchPage {
-//        id: searchPage
-//    }
+    SearchPage {
+        id: searchPage
+    }
 
     ToolBarLayout {
         id: commonTools

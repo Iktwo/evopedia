@@ -337,7 +337,8 @@ ArticleOverlay::ArticleOverlay(QSharedPointer<SlippyMap> parent)
     connect(parent.data(), SIGNAL(invalidate(QRect)), SLOT(invalidate(QRect)));
     connect(parent.data(), SIGNAL(tileRendered(QPainter*,QPoint,QRect)), SLOT(tileRendered(QPainter*,QPoint,QRect)));
     connect(parent.data(), SIGNAL(mouseClicked(QPoint,QPoint)), SLOT(mouseClicked(QPoint,QPoint)));
-    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     connect(evopedia->getArchiveManager(),
             SIGNAL(defaultLocalArchivesChanged(QList<LocalArchive*>)),
             SLOT(backendsChanged(QList<LocalArchive*>)));
@@ -346,7 +347,8 @@ ArticleOverlay::ArticleOverlay(QSharedPointer<SlippyMap> parent)
 ArticleOverlay::GeoTitleList ArticleOverlay::getTitles(const QRectF &rect, int maxTitles)
 {
     ArticleOverlay::GeoTitleList list;
-    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     list.complete = false;
 
     /* TODO2 fair division between languages? */

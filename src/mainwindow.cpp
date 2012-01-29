@@ -33,9 +33,8 @@
 #include "dumpsettings.h"
 #include "utils.h"
 #include "defines.h"
-#include "qmlapplicationviewer/qmlapplicationviewer.h"
+//#include "qmlapplicationviewer/qmlapplicationviewer.h"
 
-//MainWindow::MainWindow(QDeclarativeContext *ctxt, QWidget *parent) :
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Evopedia),
@@ -57,7 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
     titleListModel->setTitleIterator(TitleIterator());
 
     ui->setupUi(this);
-    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     foreach (LocalArchive *b, evopedia->getArchiveManager()->getDefaultLocalArchives())
        ui->languageChooser->addItem(b->getLanguage());
     /// change ui to QML
@@ -219,7 +219,8 @@ void MainWindow::mapViewRequested(qreal lat, qreal lon, uint zoom)
 
 void MainWindow::refreshSearchResults()
 {
-    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     LocalArchive *backend = evopedia->getArchiveManager()->getLocalArchive(ui->languageChooser->currentText());
     TitleIterator it;
     if (backend != 0)
@@ -247,7 +248,8 @@ void MainWindow::on_actionConfigure_Dumps_triggered()
 {
     dumpSettings->show();
 
-    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     if (evopedia->getArchiveManager()->getArchives().size() == 0) {
         QMessageBox::information(dumpSettings, tr("Archive Download"),
                                  tr("Use the menu to retrieve the list of available archives."));
@@ -308,7 +310,8 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_actionAuto_toggled(bool v)
 {
     if (v) {
-        Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//        Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+        QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
         evopedia->setNetworkUse(0);
     }
 }
@@ -316,7 +319,8 @@ void MainWindow::on_actionAuto_toggled(bool v)
 void MainWindow::on_actionAllow_toggled(bool v)
 {
     if (v) {
-        Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//        Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+        QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
         evopedia->setNetworkUse(1);
     }
 }
@@ -324,7 +328,8 @@ void MainWindow::on_actionAllow_toggled(bool v)
 void MainWindow::on_actionDeny_toggled(bool v)
 {
     if (v) {
-        Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//        Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+        QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
         evopedia->setNetworkUse(-1);
     }
 }

@@ -29,7 +29,8 @@ OTHER_FILES += \
     resources/harmattan/evopedia64.png \
 
 HEADERS += \
-    src/bzlib.h
+    src/bzlib.h \
+    src/qmlinit.h
 
 
 contains(MEEGO_EDITION,harmattan) {
@@ -41,4 +42,9 @@ contains(MEEGO_EDITION,harmattan) {
 RESOURCES += \
     src/qml/qml.qrc \
 #    resources/resources.qml
+
+SOURCES += \
+    src/qmlinit.cpp
+
+
 

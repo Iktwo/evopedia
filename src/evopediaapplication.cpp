@@ -28,14 +28,15 @@
 #include "qmlapplicationviewer/qmlapplicationviewer.h"
 #include "mainwindow.h"
 #include "utils.h"
+#include "qmlinit.h"
 
-//EvopediaApplication::EvopediaApplication(int &argc, char **argv, QDeclarativeContext *ctxt) :
 EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
     QApplication(argc, argv)
 {
 #if defined(Q_WS_X11)
     QApplication::setGraphicsSystem("raster");
 #endif
+    m_mainwindow=NULL;
 
     QTranslator *qtTranslator = new QTranslator(this);
     qtTranslator->load("qt_" + QLocale::system().name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
@@ -46,38 +47,30 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
     installTranslator(qtTranslator);
 
 
-//    QScopedPointer<QmlApplicationViewer> viewer(QmlApplicationViewer::create());
-//    QDeclarativeContext *ctxt = viewer->rootContext();
-//    ctxt->setContextProperty("",);
-
-//    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-//    viewer->setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
-//    viewer->showExpanded();
-
-    m_evopedia = new Evopedia(this);
-//    m_mainwindow = new MainWindow(ctxt);
-    m_mainwindow = new MainWindow();
+    m_evopedia = QSharedPointer<Evopedia>(new Evopedia(this));
+//    QmlInit *setupQml = new QmlInit();
+//    m_mainwindow = new MainWindow();
 
 #if defined(Q_WS_S60)
 //    m_mainwindow->showMaximized();
 #else
-    m_mainwindow->show();
+//    m_mainwindow->show();
 #endif
 }
 
 EvopediaApplication::~EvopediaApplication()
 {
-    delete m_mainwindow;
+    if(m_mainwindow!=NULL)
+        delete m_mainwindow;
 }
 
 Q_DECL_EXPORT main(int argc, char *argv[])
 {
     /* initialize random number generator */
 
-    randomNumber(2);
+    QScopedPointer<EvopediaApplication> app(new EvopediaApplication(argc,argv));
 
-    EvopediaApplication *evoapp=new EvopediaApplication(argc,argv);
-    QScopedPointer<EvopediaApplication> app(evoapp);
+    QSharedPointer<QmlInit> setupQml= QSharedPointer<QmlInit>(new QmlInit());
 
     return app->exec();
 }

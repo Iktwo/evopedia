@@ -21,6 +21,7 @@
 #include "tilefetcher.h"
 
 #include <QMutexLocker>
+#include <QSharedPointer>
 
 #include "defines.h"
 #include "evopedia.h"
@@ -48,7 +49,7 @@ void TileFetcher::fetchTile(int zoom, QPoint offset)
     QUrl url(path.arg(zoom).arg(offset.x()).arg(offset.y()));
 
     /* TODO1 thread safe? */
-    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     if (!evopedia->networkConnectionAllowed() /* TODO1 && !m_manager.cache()->metaData(m_url).isValid()*/)
         return;
 

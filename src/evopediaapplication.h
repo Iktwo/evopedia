@@ -36,7 +36,7 @@ public:
     explicit EvopediaApplication(int &argc, char **argv);
     ~EvopediaApplication();
 
-    Evopedia *evopedia() { return m_evopedia; }
+    QSharedPointer<Evopedia> evopedia() { return m_evopedia; }
 
     void openArticle(const QSharedPointer<Title> title)
     {
@@ -48,7 +48,8 @@ signals:
 
 public slots:
 private:
-    Evopedia *m_evopedia;
+//    Evopedia *m_evopedia;
+    QSharedPointer<Evopedia> m_evopedia;
     MainWindow *m_mainwindow;
 
 };

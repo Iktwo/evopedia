@@ -42,6 +42,7 @@ DumpSettings::DumpSettings(QWidget *parent) :
 #endif
 
     evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
 
     connect(ui->actionRefresh_archive_list, SIGNAL(triggered()), evopedia->getArchiveManager(), SLOT(updateRemoteArchives()));
 
