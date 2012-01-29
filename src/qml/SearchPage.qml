@@ -5,16 +5,23 @@ Page {
     id: searchPage
     tools: commonTools
 
-//    Rectangle {
-//        id: junk
-//        anchors.fill: parent
-//        color: "red"
-//    }
-
     ListView {
         id: titlesView
         anchors.fill: parent
-        model: titlesModel
-        delegate: TitlesDelegate{}
+//        model: titlesModel
+//        model: xmlModel
+        model: XmlTestModel { }
+//        delegate: TitlesDelegate { }
+        delegate: Text { text: title + ": " + url }
+//        MouseArea {
+//            id: mouseArea
+//            anchors.fill: parent
+//            onClicked: {
+//            }
+//        }
     }
+    ScrollDecorator {
+        flickableItem: titlesView
+    }
+
 }

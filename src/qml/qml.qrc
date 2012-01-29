@@ -8,5 +8,6 @@
         <file>NoArchiveMsgPage.qml</file>
         <file>SearchPage.qml</file>
         <file>TitlesDelegate.qml</file>
+        <file>testmodel.xml</file>
     </qresource>
 </RCC>

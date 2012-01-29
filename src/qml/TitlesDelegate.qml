@@ -3,11 +3,15 @@ import com.nokia.meego 1.0
 
 Item {
   id: titlesDelegate
-  height: titlesDelegate.ListView.view.height
-  width: titlesDelegate.ListView.view.width
+  height: 88
+  width: parent.width
+
+//  Row {
+//      anchors.fill: parent
+
 
   Text {
-    anchors.fill: parent;
+    anchors.fill: parent
     text: name //+" ("+size+")"
   }
 }

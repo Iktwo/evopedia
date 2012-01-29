@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <language>
+        <item> 
+            <title> Hayek </title>
+            <url> http://en.wikipedia.org/wiki/Friedrich_Hayek </url>
+        </item>
+        <item> 
+            <title> Mises </title>
+            <url> http://en.wikipedia.org/wiki/Ludwig_von_Mises </url>
+        </item>
+        <item> 
+            <title> Hoppe </title>
+            <url> http://en.wikipedia.org/wiki/Hans-Hermann_Hoppe </url>
+        </item>
+        <item> 
+            <title> Schiff </title>
+            <url> http://en.wikipedia.org/wiki/Peter_Schiff </url>
+        </item>
+        <item> 
+            <title> Paul </title>
+            <url> http://en.wikipedia.org/wiki/Ron_Paul </url>
+        </item>
+    </language>
+</rss>
+        
+

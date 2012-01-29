@@ -2,17 +2,22 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 PageStackWindow {
-    id: appWindow
+    id: rootWindow
+//    property int pageMargin: 16
 
-    initialPage: mainPage
+    initialPage: SearchPage { }
 
-    SearchPage {
-        id: mainPage
-    }
+//    SearchPage {
+//        id: searchPage
+//    }
 
     ToolBarLayout {
         id: commonTools
         visible: true
+        ToolIcon {
+            platformIconId: "toolbar-back";
+            onClicked: {myMenu.close(); pageStack.pop() }
+        }
         ToolIcon {
             platformIconId: "toolbar-view-menu"
             anchors.right: (parent === undefined) ? undefined : parent.right
@@ -23,7 +28,7 @@ PageStackWindow {
         id: myMenu
         visualParent: pageStack
         MenuLayout {
-            MenuItem { text: qsTr("Sample menu item") }
+            MenuItem { text: qsTr("Settings") }
         }
     }
 }

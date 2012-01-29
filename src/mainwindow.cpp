@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QDeclarativeContext *titlesCtxt=rootCtxt->findChild<QDeclarativeContext*>("titlesView");
 
     rootCtxt->setContextProperty("titlesModel", titleListModel);
-    view.setSource(QUrl("qrc:/meego/harmattan/qml/mainwindow.qml"));
+    view.setSource(QUrl("qrc:/Main.qml"));
 //    QObject* titlesView = QMLObject->findChild<QObject*>("titlesView");
 //    if(titlesView)
 //        titlesView->setProperty("titlesModel", titleListModel);
