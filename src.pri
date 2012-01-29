@@ -107,7 +107,12 @@ OTHER_FILES += \
     src/qml/mainwindow.qml \
     src/qml/dumpSettings.qml \
     src/qml/archiveDetailsDialog.qml \
-    src/qml/ArchiveDelegate.qml
+    src/qml/ArchiveDelegate.qml \
+    src/qml/NoArchiveMsgPage.qml \
+    src/qml/MapPage.qml \
+    src/qml/Main.qml \
+    src/qml/DumpSettingsPage.qml \
+    src/qml/ArchiveDetailsPage.qml
 
 RESOURCES += \
         resources/resources.qrc \
@@ -167,4 +172,5 @@ unix {
   iconxpm.path = $$DATADIR/pixmaps
   iconxpm.files += resources/evopedia-64x64.png
 }
+
 
