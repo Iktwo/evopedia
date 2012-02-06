@@ -6,21 +6,17 @@ QmlInit::QmlInit()
 
     titleListModel=QSharedPointer<TitleListModel>(new TitleListModel());
 
-//    viewer=QSharedPointer<QmlApplicationViewer>(new QmlApplicationViewer(QmlApplicationViewer::create()));
-//    ctxt = viewer->rootContext();
-//    ctxt->setContextProperty("",);
-
-//    viewer->setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
-//    viewer->setSource(QUrl("qrc:/Main.qml"));
-//    viewer->showExpanded();
-
 // set up the evopedia specifics
     titleListModel->setTitleIterator(TitleIterator());
-//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
     foreach (LocalArchive *b, evopedia->getArchiveManager()->getDefaultLocalArchives())
-//       ui->languageChooser->addItem(b->getLanguage());
+    {
        qDebug() << b->getLanguage();
+       lang = b->getLanguage();
+//       on_languageChooser_currentIndexChanged(lang);
+       refreshSearchResults();
+    }
+
 
 // define the view and context for QML interaction
     view = QSharedPointer<QDeclarativeView>(new QDeclarativeView());
@@ -32,4 +28,25 @@ QmlInit::QmlInit()
 
     view->setSource(QUrl("qrc:/Main.qml"));
     view->show();
+}
+
+void QmlInit::on_languageChooser_currentIndexChanged(const QString &text)
+{
+//    Qt::LayoutDirection dir = getLayoutDirection(text);
+//    ui->listView->setLayoutDirection(dir);
+//    ui->searchField->setLayoutDirection(dir);
+    refreshSearchResults();
+}
+
+void QmlInit::refreshSearchResults()
+{
+//    Evopedia *evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
+//    LocalArchive *backend = evopedia->getArchiveManager()->getLocalArchive(ui->languageChooser->currentText());
+    LocalArchive *backend = evopedia->getArchiveManager()->getLocalArchive(lang);
+    TitleIterator it;
+    if (backend != 0)
+//        it = backend->getTitlesWithPrefix(ui->searchField->text());
+        it = backend->getTitlesWithPrefix("");
+    titleListModel->setTitleIterator(it);
 }

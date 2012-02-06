@@ -10,7 +10,7 @@ Page {
         anchors.fill: parent
 
         model: titlesModel
-        delegate: Text { text: title } //+ ": " + url }
+        delegate: Text { text: name } //+ ": " + url }
 
 //        model: XmlTestModel { }
 //        delegate: Text { text: title + ": " + url }

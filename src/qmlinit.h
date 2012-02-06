@@ -33,6 +33,7 @@ private:
     MapWindow *mapWindow;
     DumpSettings *dumpSettings;
     QSharedPointer<Evopedia> evopedia;
+    QString lang;
 
 protected:
     void closeEvent(QCloseEvent *event);
