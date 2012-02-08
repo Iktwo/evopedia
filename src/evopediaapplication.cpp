@@ -49,12 +49,12 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
 
     m_evopedia = QSharedPointer<Evopedia>(new Evopedia(this));
 //    QmlInit *setupQml = new QmlInit();
-    m_mainwindow = new MainWindow();
+//    m_mainwindow = new MainWindow();
 
 #if defined(Q_WS_S60)
 //    m_mainwindow->showMaximized();
 #else
-    m_mainwindow->show();
+//    m_mainwindow->show();
 #endif
 }
 

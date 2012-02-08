@@ -25,7 +25,6 @@ QmlInit::QmlInit()
 // set the model up in the list view to use the titleListModel
     rootCtxt->setContextProperty("titlesModel", titleListModel.data());
 
-
     view->setSource(QUrl("qrc:/Main.qml"));
     view->show();
 }

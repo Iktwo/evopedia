@@ -3,9 +3,7 @@ import com.nokia.meego 1.0
 
 PageStackWindow {
     id: rootWindow
-//    property int pageMargin: 16
 
-//    initialPage: SearchPage { }
     initialPage: searchPage
 
     SearchPage {

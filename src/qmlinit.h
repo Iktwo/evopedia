@@ -14,7 +14,6 @@
 #include "evopediaapplication.h"
 #include "utils.h"
 #include "defines.h"
-//#include "qmlapplicationviewer/qmlapplicationviewer.h"
 
 class QmlInit
 {
@@ -25,6 +24,7 @@ public:
     QmlInit();
 private:
     QSharedPointer<QDeclarativeView> view;
+    QSharedPointer<QmlApplicationViewer> viewer;
     QSharedPointer<QDeclarativeContext> rootCtxt;
 //    QSharedPointer<QmlApplicationViewer> viewer;
 //    QDeclarativeContext *ctxt;

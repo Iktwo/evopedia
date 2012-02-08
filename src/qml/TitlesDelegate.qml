@@ -3,7 +3,7 @@ import com.nokia.meego 1.0
 
 Item {
   id: titlesDelegate
-  height: 88
+  height: childrenRect.height + 4
   width: parent.width
 
 //  Row {
@@ -11,7 +11,9 @@ Item {
 
 
   Text {
-    anchors.fill: parent
+//    anchors.fill: parent
+
     text: name //+" ("+size+")"
+    font.pointSize: 24
   }
 }
