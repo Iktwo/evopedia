@@ -5,6 +5,8 @@
 #include <QString>
 #include <QtDeclarative>
 #include <QSharedPointer>
+#include <QStringList>
+#include <QStringListModel>
 
 #include "localarchive.h"
 #include "titlelistmodel.h"
@@ -12,15 +14,16 @@
 #include "dumpsettings.h"
 #include "qmlapplicationviewer/qmlapplicationviewer.h"
 #include "evopediaapplication.h"
+#include "qstringlistmodelforqml.h"
 #include "utils.h"
 #include "defines.h"
 
-class QmlInit
+class QmlInit : public QObject
 {
-//    Q_OBJECT
+    Q_OBJECT
 
 public:
-//    explicit QmlInit(QWidget *parent = 0);
+//    QmlInit(QWidget *parent = 0);
     QmlInit();
 private:
     QSharedPointer<QDeclarativeView> view;
@@ -34,22 +37,25 @@ private:
     DumpSettings *dumpSettings;
     QSharedPointer<Evopedia> evopedia;
     QString lang;
+    QString searchPrefix;
+    QStringList languageList;
+    QSharedPointer<QStringListModelForQML> languageListModel;
 
 protected:
     void closeEvent(QCloseEvent *event);
 
-private slots:
-    void on_actionDeny_toggled(bool v);
-    void on_actionAllow_toggled(bool v);
-    void on_actionAuto_toggled(bool v);
-    void on_actionConfigure_Dumps_triggered();
-    void on_actionMap_triggered();
-    void on_actionAbout_triggered();
-    void on_languageChooser_currentIndexChanged(const QString &text);
-    void on_listView_activated(QModelIndex index);
-    void on_searchField_textChanged(const QString &text);
-    void mapViewRequested(qreal lat, qreal lon, uint zoom);
-    void backendsChanged(QList<LocalArchive *>backends);
+public slots:
+//    void on_actionDeny_toggled(bool v);
+//    void on_actionAllow_toggled(bool v);
+//    void on_actionAuto_toggled(bool v);
+//    void on_actionConfigure_Dumps_triggered();
+//    void on_actionMap_triggered();
+//    void on_actionAbout_triggered();
+    void on_languageChooser_currentIndexChanged(QString text);
+//    void on_listView_activated(QModelIndex index);
+    void on_searchField_textChanged(QString text);
+//    void mapViewRequested(qreal lat, qreal lon, uint zoom);
+//    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();
 };
 

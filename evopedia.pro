@@ -30,7 +30,8 @@ OTHER_FILES += \
 
 HEADERS += \
     src/bzlib.h \
-    src/qmlinit.h
+    src/qmlinit.h \
+    qstringlistmodelforqml.h
 
 
 contains(MEEGO_EDITION,harmattan) {
@@ -44,7 +45,11 @@ RESOURCES += \
 #    resources/resources.qml
 
 SOURCES += \
-    src/qmlinit.cpp
+    src/qmlinit.cpp \
+    qstringlistmodelforqml.cpp
 
+
+#OBJECTS_DIR = .obj
+#MOC_DIR = .moc
 
 

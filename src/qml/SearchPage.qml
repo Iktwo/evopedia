@@ -5,6 +5,9 @@ Page {
     id: searchPage
     tools: commonTools
 
+    signal signalLanguageChanged(string lang);
+    signal signalSearchTextChanged(string text);
+
     ListView {
         id: titlesView
         anchors {
@@ -15,6 +18,7 @@ Page {
         }
 
         model: titlesModel
+//        delegate: titlesDelegate
         delegate: Text { text: name }
     }
 
@@ -22,11 +26,15 @@ Page {
         id: searchField
         placeholderText: "Searchterm..."
         anchors.bottom: parent.bottom
+        onTextChanged: {
+            searchPage.signalSearchTextChanged(searchField.text)
+            QmlInit.on_searchField_textChanged(searchField.text)
+        }
     }
 
     Button {
         id: languageButton
-        text: "xx"
+        text: "x"
         anchors.left: searchField.right
         anchors.bottom: parent.bottom
         onClicked: langDialog.open()
@@ -39,29 +47,24 @@ Page {
     SelectionDialog {
         id: langDialog
         titleText: qsTr("Language")
-        model: ListModel {
-            ListElement { name: "first" }
-            ListElement { name: "second" }
+        selectedIndex: 0
+        model: ListModel { }
+        onAccepted: {
+            languageButton.text = langDialog.model.get(langDialog.selectedIndex).name
+            searchPage.signalLanguageChanged(langDialog.model.get(langDialog.selectedIndex).name)
+            QmlInit.on_languageChooser_currentIndexChanged(langDialog.model.get(langDialog.selectedIndex).name)
         }
 
-//        title: Rectangle {
-//            id: titleField
-//            height: 2
-//            width: parent.width
-//            color: "white"
-//        }
-
-//        content:Item {
-//            id: name
-//            height: 50
-//            width: parent.width
-//            Text {
-//                id: text
-//                font.pixelSize: 22
-//                anchors.centerIn: parent
-//                color: "white"
-//                text: qsTr("Language")
-//            }
-//        }
+        onRejected: {
+            selectedIndex = 0
+            searchPage.signalLanguageChanged(langDialog.model.get(langDialog.selectedIndex).name)
+        }
     }
+
+    Connections {
+           target: languageSelectionModel
+           onStringAdded: {
+               langDialog.model.append({name: newString})
+           }
+       }
 }
