@@ -57,6 +57,7 @@ private slots:
     void on_actionAbout_triggered();
     void on_languageChooser_currentIndexChanged(const QString &text);
     void on_listView_activated(QModelIndex index);
+//    void on_listView_activated(int index);
     void on_searchField_textChanged(const QString &text);
     void mapViewRequested(qreal lat, qreal lon, uint zoom);
     void backendsChanged(QList<LocalArchive *>backends);

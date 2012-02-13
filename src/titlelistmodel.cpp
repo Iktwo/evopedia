@@ -90,14 +90,15 @@ QVariant TitleListModel::data(const QModelIndex &index, int role) const
 }
 
 QSharedPointer<Title> TitleListModel::getTitleAt(const QModelIndex &index) const
+//QSharedPointer<Title> TitleListModel::getTitleAt(int row) const
 {
     if (!index.isValid())
-//        return QSharedPointer<Title>();
         return QSharedPointer<Title>(new Title());
 
     if (index.row() >= titles.size() || index.row() < 0)
-//        return QSharedPointer<Title>();
+//    if (row >= titles.size() || row < 0)
         return QSharedPointer<Title>(new Title());
 
     return titles[index.row()];
+//    return titles[row];
 }

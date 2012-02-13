@@ -18,6 +18,8 @@
 #include "utils.h"
 #include "defines.h"
 
+Q_DECLARE_METATYPE(QModelIndex)
+
 class QmlInit : public QObject
 {
     Q_OBJECT
@@ -29,7 +31,6 @@ private:
     QSharedPointer<QDeclarativeView> view;
     QSharedPointer<QmlApplicationViewer> viewer;
     QSharedPointer<QDeclarativeContext> rootCtxt;
-//    QSharedPointer<QmlApplicationViewer> viewer;
 //    QDeclarativeContext *ctxt;
 
     QSharedPointer<TitleListModel> titleListModel;
@@ -52,7 +53,8 @@ public slots:
 //    void on_actionMap_triggered();
 //    void on_actionAbout_triggered();
     void on_languageChooser_currentIndexChanged(QString text);
-//    void on_listView_activated(QModelIndex index);
+    void on_listView_activated(QModelIndex index);
+//    void on_listView_activated(int index);
     void on_searchField_textChanged(QString text);
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);
 //    void backendsChanged(QList<LocalArchive *>backends);

@@ -186,10 +186,8 @@ void MainWindow::on_searchField_textChanged(const QString &text)
 }
 
 void MainWindow::on_listView_activated(QModelIndex index)
+//void MainWindow::on_listView_activated(int index)
 {
-//    Title *title=new Title(&titleListModel->getTitleAt(index));
-
-//    (static_cast<EvopediaApplication *>(qApp))->openArticle(title);
     (static_cast<EvopediaApplication *>(qApp))->openArticle(titleListModel->getTitleAt(index));
 }
 

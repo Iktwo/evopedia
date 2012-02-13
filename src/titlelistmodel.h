@@ -45,6 +45,7 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     QSharedPointer<Title> getTitleAt(const QModelIndex &index) const;
+//    QSharedPointer<Title> getTitleAt(int row) const;
     Q_INVOKABLE QSharedPointer<Title> get(int index) {
         if(index<titles.size())
             return titles.at(index);
