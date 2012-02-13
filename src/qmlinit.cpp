@@ -34,7 +34,7 @@ QmlInit::QmlInit()
     rootCtxt->setContextProperty("languageSelectionModel", languageListModel.data());
 
     view->setSource(QUrl("qrc:/Main.qml"));
-    view->show();
+    view->showFullScreen();
 
     QObject *rootObject= view->rootObject();
     view->rootContext()->setContextProperty("QmlInit",this);
