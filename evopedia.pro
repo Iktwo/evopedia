@@ -16,6 +16,12 @@ include(src.pri)
 symbian:include(bzlib.pri)
 include(src/qmlapplicationviewer/qmlapplicationviewer.pri)
 
+!isEmpty(MEEGO_VERSION_MAJOR) {
+    splash.files = resources/harmattan/splash.png
+    splash.path = /usr/share/evopedia
+    INSTALLS += splash
+}
+
 OTHER_FILES += \
     qtc_packaging/debian_harmattan/rules \
     qtc_packaging/debian_harmattan/README \
@@ -27,6 +33,9 @@ OTHER_FILES += \
     resources/harmattan/evopedia.svg \
     resources/harmattan/evopedia80.png \
     resources/harmattan/evopedia64.png \
+    src/qml/SettingsPage.qml \
+    src/qml/AboutDialog.qml \
+    src/qml/TittleBar.qml
 
 HEADERS += \
     src/bzlib.h \

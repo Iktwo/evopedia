@@ -113,7 +113,8 @@ OTHER_FILES += \
     src/qml/Main.qml \
     src/qml/DumpSettingsPage.qml \
     src/qml/ArchiveDetailsPage.qml \
-    src/qml/XmlTestModel.qml
+    src/qml/XmlTestModel.qml \
+    src/qml/AboutDialog.qml
 
 RESOURCES += \
         resources/resources.qrc \

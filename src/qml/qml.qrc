@@ -10,5 +10,8 @@
         <file>TitlesDelegate.qml</file>
         <file>testmodel.xml</file>
         <file>XmlTestModel.qml</file>
+        <file>SettingsPage.qml</file>
+        <file>AboutDialog.qml</file>
+        <file>TittleBar.qml</file>
     </qresource>
 </RCC>

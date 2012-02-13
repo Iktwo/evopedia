@@ -6,6 +6,7 @@
         <file>harmattan/evopedia.svg</file>
         <file>harmattan/evopedia64.png</file>
         <file>harmattan/evopedia80.png</file>
+        <file>search_sip_attribute.png</file>
     </qresource>
     <qresource prefix="/web">
         <file>footer.html</file>
