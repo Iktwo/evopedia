@@ -81,3 +81,8 @@ void QmlInit::on_listView_activated(QModelIndex index)
     (static_cast<EvopediaApplication *>(qApp))->openArticle(titleListModel->getTitleAt(index));
 }
 
+void QmlInit::on_title_selected(QString title)
+{
+    (static_cast<EvopediaApplication *>(qApp))->openArticle(titleListModel->getTitleFrom(title));
+}
+

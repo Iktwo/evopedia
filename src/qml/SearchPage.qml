@@ -17,26 +17,26 @@ Page {
             left: parent.left
             right: parent.right
         }
+        model: visualTitlesModel
 
-//        VisualDataModel {
-//            id: visualTitlesModel
+        VisualDataModel {
+            id: visualTitlesModel
             model: titlesModel
-
-
             delegate:  Text {
                 id: titleText
                 text: "<b>" + name + "</b>"
                 MouseArea {
                     anchors.fill: parent
-                    //    onClicked: { QmlInit.on_listView_activated(titlesView.model.get(titlesView.model.selectedIndex)) }
                     onClicked: {
                         selectedTitle = name
                         console.log(selectedTitle)
-                        QmlInit.on_listView_activated(model[titlesView.model.selectedIndex])
+//                        QmlInit.on_listView_activated(modelIndex[titlesView.model.selectedIndex])
+//                        QmlInit.on_listView_activated(titlesView.currentIndex)
+                        QmlInit.on_title_selected(selectedTitle)
                     }
                 }
             }
-//        }
+        }
     }
 
     TextField {

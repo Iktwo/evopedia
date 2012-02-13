@@ -102,3 +102,16 @@ QSharedPointer<Title> TitleListModel::getTitleAt(const QModelIndex &index) const
     return titles[index.row()];
 //    return titles[row];
 }
+
+QSharedPointer<Title> TitleListModel::getTitleFrom(const QString &title) const
+{
+    foreach( QSharedPointer<Title> t, titles)
+    {
+        if(t->getReadableName()==title)
+            return t;
+    }
+
+    return QSharedPointer<Title>(new Title());
+}
+
+
