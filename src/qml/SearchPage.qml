@@ -83,6 +83,7 @@ Page {
         VisualDataModel {
             id: visualTitlesModel
             model: titlesModel
+
             delegate:
                 ListDelegate{
 
