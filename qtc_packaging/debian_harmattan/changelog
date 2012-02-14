@@ -1,5 +1,5 @@
-evopedia (0.0.1) unstable; urgency=low
+evopedia (0.1.0) unstable; urgency=low
 
-  * Initial Release.
+  * Initial Working UI
 
  -- Peter Rhone <peter@unknown>  Tue, 17 Jan 2012 21:58:17 +0100
