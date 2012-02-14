@@ -8,6 +8,9 @@ PageStackWindow {
 
     SearchPage {
         id: searchPage
+        Component.onCompleted: {
+            theme.inverted=true;
+        }
     }
 
     ToolBarLayout {

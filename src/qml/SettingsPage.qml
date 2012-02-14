@@ -14,18 +14,32 @@ Page {
     }
 
     Button{
+        id: btnLanguage
         text: "Language";
         onClicked: langDialog.open()
         anchors.top: tittleBar.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 10
     }
 
-    Button{
-        text: "Switch theme";
-        anchors.top: tittleBar.bottom
-        anchors.topMargin: 20
-        onClicked: {
-            theme.inverted=!theme.inverted;
+    Label{
+        id: lblTheme
+        text: "Dark Theme"
+        anchors.verticalCenter: swtTheme.verticalCenter
+    }
+
+    Switch {
+        id: swtTheme;
+        checked: true;
+        anchors.left: lblTheme.right
+        anchors.leftMargin: 10
+        anchors.top: btnLanguage.bottom
+        anchors.topMargin: 10
+        /*platformStyle: SwitchStyle {
+            switchOn: "image://theme/color2-meegotouch-switch-on"
+        }*/
+
+        onCheckedChanged: {
+            theme.inverted=checked
         }
     }
 
