@@ -55,6 +55,7 @@ public slots:
     void on_languageChooser_currentIndexChanged(QString text);
     void on_listView_activated(QModelIndex index);
     void on_title_selected(QString title);
+    QString getArticleURL(QString title);
 //    void on_listView_activated(int index);
     void on_searchField_textChanged(QString text);
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);

@@ -86,3 +86,7 @@ void QmlInit::on_title_selected(QString title)
     (static_cast<EvopediaApplication *>(qApp))->openArticle(titleListModel->getTitleFrom(title));
 }
 
+QString QmlInit::getArticleURL(QString title){
+    return (static_cast<EvopediaApplication *>(qApp))->getArticleURL(titleListModel->getTitleFrom(title));;
+}
+

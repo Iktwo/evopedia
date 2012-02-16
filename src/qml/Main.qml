@@ -40,6 +40,16 @@ PageStackWindow {
         }
     }
 
+    ToolBarLayout {
+        id: articleTools
+        visible: false;
+        ToolIcon {
+            platformIconId: "toolbar-back";
+            anchors.left: (parent === undefined) ? undefined : parent.left
+            onClicked: {pageStack.pop()}
+        }
+    }
+
     /*Menu {
         id: myMenu
         visualParent: pageStack

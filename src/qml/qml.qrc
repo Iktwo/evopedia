@@ -13,5 +13,6 @@
         <file>SettingsPage.qml</file>
         <file>AboutDialog.qml</file>
         <file>TittleBar.qml</file>
+        <file>ArticleView.qml</file>
     </qresource>
 </RCC>
