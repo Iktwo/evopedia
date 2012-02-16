@@ -6,11 +6,21 @@ Page {
 
     tools: articleTools
 
-    function fixUrl(url){
-        webView.url = url;
+    function fixUrl(url)
+    {
+        webView.url=url
     }
 
-    Flickable{
+    Flickable {
+        property alias title: webView.title
+        property alias icon: webView.icon
+        property alias progress: webView.progress
+        property alias url: webView.url
+        property alias back: webView.back
+        property alias stop: webView.stop
+        property alias reload: webView.reload
+        property alias forward: webView.forward
+
         id: flickable
         anchors.fill: parent
         contentWidth: Math.max(parent.width,webView.width)
@@ -21,29 +31,20 @@ Page {
             if (width > webView.width*webView.contentsScale && webView.contentsScale < 1.0)
                 webView.contentsScale = width / webView.width * webView.contentsScale;
         }
-        WebView{
+
+        WebView {
             id: webView
-            anchors.fill: parent
-            //url: "http://google.com"
-            smooth: false
+            transformOrigin: Item.TopLeft
+
+            //url: fixUrl(webBrowser.urlString)
+            smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
             focus: true
-            preferredWidth: flickable.width
-            preferredHeight: flickable.height
 
-            onContentsSizeChanged: {
-                // zoom out
-                contentsScale = Math.min(1,flickable.width / contentsSize.width)
-            }
+            onAlert: console.log(message)
 
-            onUrlChanged: {
-                // got to topleft
-                flickable.contentX = 0
-                flickable.contentY = 0
-                //if (url != null) { header.editUrl = url.toString(); }
-            }
-
-            function doZoom(zoom,centerX,centerY){
-                if (centerX){
+            function doZoom(zoom,centerX,centerY)
+            {
+                if (centerX) {
                     var sc = zoom*contentsScale;
                     scaleAnim.to = sc;
                     flickVX.from = flickable.contentX
@@ -56,6 +57,22 @@ Page {
                 }
             }
 
+            Keys.onLeftPressed: webView.contentsScale -= 0.1
+            Keys.onRightPressed: webView.contentsScale += 0.1
+
+            preferredWidth: flickable.width
+            preferredHeight: flickable.height
+            contentsScale: 1
+            onContentsSizeChanged: {
+                // zoom out
+                contentsScale = Math.min(1,flickable.width / contentsSize.width)
+            }
+            onUrlChanged: {
+                // got to topleft
+                flickable.contentX = 0
+                flickable.contentY = 0
+                if (url != null) { header.editUrl = url.toString(); }
+            }
             onDoubleClick: {
                 if (!heuristicZoom(clickX,clickY,2.5)) {
                     var zf = flickable.width / contentsSize.width
