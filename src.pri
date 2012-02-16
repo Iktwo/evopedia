@@ -108,7 +108,6 @@ OTHER_FILES += \
     src/qml/dumpSettings.qml \
     src/qml/archiveDetailsDialog.qml \
     src/qml/ArchiveDelegate.qml \
-    src/qml/NoArchiveMsgPage.qml \
     src/qml/MapPage.qml \
     src/qml/Main.qml \
     src/qml/DumpSettingsPage.qml \
@@ -116,7 +115,8 @@ OTHER_FILES += \
     src/qml/XmlTestModel.qml \
     src/qml/AboutDialog.qml \
     src/qml/SettingsPage.qml \
-    src/qml/ArticleView.qml
+    src/qml/ArticleView.qml \
+    src/qml/NoArchiveDialog.qml
 
 RESOURCES += \
         resources/resources.qrc \
