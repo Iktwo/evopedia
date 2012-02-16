@@ -9,7 +9,7 @@ QmlInit::QmlInit()
 
 // define the view and context for QML interaction
     view = QSharedPointer<QDeclarativeView>(new QDeclarativeView());
-    QDeclarativeContext *rootCtxt = view->rootContext();
+    rootCtxt = view->rootContext();
 
     // set up the evopedia specifics
     titleListModel->setTitleIterator(TitleIterator());
@@ -40,6 +40,13 @@ QmlInit::QmlInit()
     view->rootContext()->setContextProperty("QmlInit",this);
 
     languageListModel->setStringList(languageList);
+
+    QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
+    useExternalBrowser = (settings->value("useExternalBrowser",false).toBool());
+    darkTheme = (settings->value("darkTheme",true).toBool());
+    rootCtxt->setContextProperty("darkTheme",darkTheme);
+    rootCtxt->setContextProperty("useExternalBrowser",useExternalBrowser);
+    delete settings;
 }
 
 void QmlInit::on_languageChooser_currentIndexChanged(QString text)
@@ -90,3 +97,20 @@ QString QmlInit::getArticleURL(QString title){
     return (static_cast<EvopediaApplication *>(qApp))->getArticleURL(titleListModel->getTitleFrom(title));;
 }
 
+void QmlInit::setUseExternalBrowser(bool value){
+    useExternalBrowser = value;
+    rootCtxt->setContextProperty("useExternalBrowser", useExternalBrowser);
+
+    QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
+    settings->setValue("useExternalBrowser",useExternalBrowser);
+    delete settings;
+}
+
+void QmlInit::setDarkTheme(bool value){
+    darkTheme = value;
+    rootCtxt->setContextProperty("darkTheme", darkTheme);
+
+    QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
+    settings->setValue("darkTheme",darkTheme);
+    delete settings;
+}

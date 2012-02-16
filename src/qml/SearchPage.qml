@@ -100,10 +100,12 @@ Page {
                     //                        QmlInit.on_listView_activated(modelIndex[titlesView.model.selectedIndex])
                     //                        QmlInit.on_listView_activated(titlesView.currentIndex)
 
-
-                    //QmlInit.on_title_selected(selectedTitle)
-                    articleView.fixUrl(QmlInit.getArticleURL(selectedTitle));
-                    pageStack.push(articleView);
+                    if (useExternalBrowser){
+                        QmlInit.on_title_selected(selectedTitle)
+                    }else{
+                        articleView.fixUrl(QmlInit.getArticleURL(selectedTitle));
+                        pageStack.push(articleView);
+                    }
                 }
             }
         }

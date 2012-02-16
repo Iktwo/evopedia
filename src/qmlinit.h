@@ -7,6 +7,7 @@
 #include <QSharedPointer>
 #include <QStringList>
 #include <QStringListModel>
+#include <QSettings>
 
 #include "localarchive.h"
 #include "titlelistmodel.h"
@@ -30,7 +31,7 @@ public:
 private:
     QSharedPointer<QDeclarativeView> view;
     QSharedPointer<QmlApplicationViewer> viewer;
-    QSharedPointer<QDeclarativeContext> rootCtxt;
+    //QSharedPointer<QDeclarativeContext> rootCtxt;
 //    QDeclarativeContext *ctxt;
 
     QSharedPointer<TitleListModel> titleListModel;
@@ -41,6 +42,10 @@ private:
     QString searchPrefix;
     QStringList languageList;
     QSharedPointer<QStringListModelForQML> languageListModel;
+    QSettings *settings;
+    QDeclarativeContext *rootCtxt;
+    bool useExternalBrowser;
+    bool darkTheme;
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -61,6 +66,9 @@ public slots:
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);
 //    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();
+    void setUseExternalBrowser(bool value);
+    void setDarkTheme(bool value);
+
 };
 
 #endif // QMLINIT_H

@@ -9,7 +9,11 @@ PageStackWindow {
     SearchPage {
         id: searchPage
         Component.onCompleted: {
-            theme.inverted=true;
+            if (darkTheme){
+                theme.inverted=true;
+            }else{
+                theme.inverted=false;
+            }
         }
     }
 

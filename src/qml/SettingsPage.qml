@@ -29,7 +29,7 @@ Page {
 
     Switch {
         id: swtTheme;
-        checked: true;
+        checked: darkTheme;
         anchors.left: lblTheme.right
         anchors.leftMargin: 10
         anchors.top: btnLanguage.bottom
@@ -40,8 +40,32 @@ Page {
 
         onCheckedChanged: {
             theme.inverted=checked
+            QmlInit.setDarkTheme(swtTheme.checked)
         }
     }
+
+    Label{
+        id: lblExternalBrowser
+        text: "Use external browser"
+        anchors.verticalCenter: swtExternalBrowser.verticalCenter
+    }
+
+    Switch {
+        id: swtExternalBrowser;
+        checked: useExternalBrowser;
+        anchors.left: lblExternalBrowser.right
+        anchors.leftMargin: 10
+        anchors.top: swtTheme.bottom
+        anchors.topMargin: 10
+        /*platformStyle: SwitchStyle {
+            switchOn: "image://theme/color2-meegotouch-switch-on"
+        }*/
+
+        onCheckedChanged: {
+            QmlInit.setUseExternalBrowser(swtExternalBrowser.checked)
+        }
+    }
+
 
     SelectionDialog {
         id: langDialog
