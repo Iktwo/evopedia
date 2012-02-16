@@ -6,5 +6,5 @@ QueryDialog {
 
     titleText: "Evopedia" + " 0.1.0"
     icon: "qrc:/meego/harmattan/evopedia80.png"
-    message: qsTr("Offline Wikipedia Viewer, ported to Harmattan by Peter Rhone, UI work by Iktwo, you can find the code in <br> https://github.com/Iktwo/evopedia")
+    message: qsTr("Offline Wikipedia Viewer, developer by Christian Reitwießner ported to Harmattan by Peter Rhone and Iktwo, you can find the source code in <br> https://github.com/Iktwo/evopedia")
 }
