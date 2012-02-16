@@ -39,7 +39,7 @@ Page {
         }
     }
 
-    Button{
+    Button {
         id: btnSearch;
         anchors.top: tittleBar.bottom
         anchors.topMargin: 10
@@ -99,6 +99,7 @@ Page {
                     //                        QmlInit.on_listView_activated(modelIndex[titlesView.model.selectedIndex])
                     //                        QmlInit.on_listView_activated(titlesView.currentIndex)
                     QmlInit.on_title_selected(selectedTitle)
+                    pageStack.push(titleViewerPage)
                 }
             }
         }

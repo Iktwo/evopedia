@@ -72,5 +72,8 @@ Q_DECL_EXPORT main(int argc, char *argv[])
 
     QSharedPointer<QmlInit> setupQml= QSharedPointer<QmlInit>(new QmlInit());
 
+    QObject::connect(app.data(),SIGNAL(openUrl(QUrl)),setupQml.data(),SLOT(on_open_url(QUrl)));
+//    QObject::connect(app.data(),SIGNAL(showHtml(QString&)),setupQml.data(),SLOT(on_show_html(QString&)));
+
     return app->exec();
 }

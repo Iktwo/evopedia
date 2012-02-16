@@ -27,12 +27,12 @@
 #include <QSharedPointer>
 #include "evopedia.h"
 #include "mainwindow.h"
+#include "qmlinit.h"
 
 class EvopediaApplication : public QApplication
 {
     Q_OBJECT
 public:
-//    explicit EvopediaApplication(int &argc, char **argv, QDeclarativeContext* ctxt);
     explicit EvopediaApplication(int &argc, char **argv);
     ~EvopediaApplication();
 
@@ -41,14 +41,20 @@ public:
     void openArticle(const QSharedPointer<Title> title)
     {
         QDesktopServices::openUrl(m_evopedia->getArticleUrl(title));
+        emit openUrl(m_evopedia->getArticleUrl(title));
     }
+//    void getArticleHtml(const QSharedPointer<Title> title)
+//    {
+//        emit showHtml(m_evopedia->getArticleHtml());
+//    }
 
 
 signals:
+    void openUrl(QUrl url);
+//    void showHtml(QString& html);
 
 public slots:
 private:
-//    Evopedia *m_evopedia;
     QSharedPointer<Evopedia> m_evopedia;
     MainWindow *m_mainwindow;
 

@@ -18,24 +18,23 @@
 #include "utils.h"
 #include "defines.h"
 
-Q_DECLARE_METATYPE(QModelIndex)
+//Q_DECLARE_METATYPE(QModelIndex)
 
 class QmlInit : public QObject
 {
     Q_OBJECT
 
 public:
-//    QmlInit(QWidget *parent = 0);
-    QmlInit();
+    QmlInit(QWidget *parent = 0);
 private:
     QSharedPointer<QDeclarativeView> view;
     QSharedPointer<QmlApplicationViewer> viewer;
-    QSharedPointer<QDeclarativeContext> rootCtxt;
+//    QSharedPointer<QDeclarativeContext> rootCtxt;
 //    QDeclarativeContext *ctxt;
 
     QSharedPointer<TitleListModel> titleListModel;
-    MapWindow *mapWindow;
-    DumpSettings *dumpSettings;
+//    MapWindow *mapWindow;
+//    DumpSettings *dumpSettings;
     QSharedPointer<Evopedia> evopedia;
     QString lang;
     QString searchPrefix;
@@ -57,6 +56,8 @@ public slots:
     void on_title_selected(QString title);
 //    void on_listView_activated(int index);
     void on_searchField_textChanged(QString text);
+    void on_open_url(QUrl url);
+    void on_show_html(QString &html);
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);
 //    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();

@@ -40,6 +40,15 @@ PageStackWindow {
         }
     }
 
+    ToolBarLayout {
+        id: webviewTools
+        visible: true
+        ToolIcon {
+            platformIconId: "toolbar-back";
+            onClicked: { pageStack.pop() }
+        }
+    }
+
     /*Menu {
         id: myMenu
         visualParent: pageStack
@@ -72,5 +81,9 @@ PageStackWindow {
 
     AboutDialog{
         id: aboutDialog;
+    }
+
+    TitleViewer{
+        id: titleViewerPage;
     }
 }
