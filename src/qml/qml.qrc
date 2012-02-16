@@ -5,7 +5,6 @@
         <file>DumpSettingsPage.qml</file>
         <file>Main.qml</file>
         <file>MapPage.qml</file>
-        <file>NoArchiveMsgPage.qml</file>
         <file>SearchPage.qml</file>
         <file>TitlesDelegate.qml</file>
         <file>testmodel.xml</file>
@@ -14,5 +13,6 @@
         <file>AboutDialog.qml</file>
         <file>TittleBar.qml</file>
         <file>ArticleView.qml</file>
+        <file>NoArchiveDialog.qml</file>
     </qresource>
 </RCC>
