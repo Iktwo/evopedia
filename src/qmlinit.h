@@ -41,7 +41,7 @@ private:
     QStringList languageList;
     QSharedPointer<QStringListModelForQML> languageListModel;
     QSettings *settings;
-    QDeclarativeContext *rootCtxt;
+//    QDeclarativeContext *rootCtxt;
     bool useExternalBrowser;
     bool darkTheme;
 

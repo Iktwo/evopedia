@@ -263,6 +263,7 @@ void EvopediaWebServer::outputWikiPage(QTcpSocket *socket, const QStringList &pa
         outputHeader(socket, "404");
     } else {
         QSharedPointer<Title> t = backend->getTitleFromPath(pathParts);
+        if(t == NULL) return;
         QByteArray articleData = backend->getArticle(t);
         if (articleData.isNull()) {
             QString lastPart = pathParts[pathParts.length() - 1];

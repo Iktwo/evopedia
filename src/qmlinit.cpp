@@ -1,6 +1,6 @@
 #include "qmlinit.h"
 
-QmlInit::QmlInit()
+QmlInit::QmlInit(QWidget* parent)
 {
 
     titleListModel=QSharedPointer<TitleListModel>(new TitleListModel());
@@ -47,8 +47,8 @@ QmlInit::QmlInit()
     QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
     useExternalBrowser = (settings->value("useExternalBrowser",false).toBool());
     darkTheme = (settings->value("darkTheme",true).toBool());
-    rootCtxt->setContextProperty("darkTheme",darkTheme);
-    rootCtxt->setContextProperty("useExternalBrowser",useExternalBrowser);
+    view->rootContext()->setContextProperty("darkTheme",darkTheme);
+    view->rootContext()->setContextProperty("useExternalBrowser",useExternalBrowser);
     delete settings;
 }
 
@@ -125,7 +125,7 @@ QString QmlInit::getArticleURL(QString title){
 
 void QmlInit::setUseExternalBrowser(bool value){
     useExternalBrowser = value;
-    rootCtxt->setContextProperty("useExternalBrowser", useExternalBrowser);
+    view->rootContext()->setContextProperty("useExternalBrowser", useExternalBrowser);
 
     QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
     settings->setValue("useExternalBrowser",useExternalBrowser);
@@ -134,7 +134,7 @@ void QmlInit::setUseExternalBrowser(bool value){
 
 void QmlInit::setDarkTheme(bool value){
     darkTheme = value;
-    rootCtxt->setContextProperty("darkTheme", darkTheme);
+    view->rootContext()->setContextProperty("darkTheme", darkTheme);
 
     QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
     settings->setValue("darkTheme",darkTheme);
