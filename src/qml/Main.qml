@@ -9,7 +9,11 @@ PageStackWindow {
     SearchPage {
         id: searchPage
         Component.onCompleted: {
-            theme.inverted=true;
+            if (darkTheme){
+                theme.inverted=true;
+            }else{
+                theme.inverted=false;
+            }
         }
     }
 
@@ -41,11 +45,12 @@ PageStackWindow {
     }
 
     ToolBarLayout {
-        id: webviewTools
-        visible: true
+        id: articleTools
+        visible: false;
         ToolIcon {
             platformIconId: "toolbar-back";
-            onClicked: { pageStack.pop() }
+            anchors.left: (parent === undefined) ? undefined : parent.left
+            onClicked: {pageStack.pop()}
         }
     }
 
@@ -81,9 +86,5 @@ PageStackWindow {
 
     AboutDialog{
         id: aboutDialog;
-    }
-
-    TitleViewer{
-        id: titleViewerPage;
     }
 }

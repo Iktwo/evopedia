@@ -18,7 +18,7 @@
 #include "utils.h"
 #include "defines.h"
 
-//Q_DECLARE_METATYPE(QModelIndex)
+Q_DECLARE_METATYPE(QModelIndex)
 
 class QmlInit : public QObject
 {
@@ -40,6 +40,10 @@ private:
     QString searchPrefix;
     QStringList languageList;
     QSharedPointer<QStringListModelForQML> languageListModel;
+    QSettings *settings;
+    QDeclarativeContext *rootCtxt;
+    bool useExternalBrowser;
+    bool darkTheme;
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -54,6 +58,7 @@ public slots:
     void on_languageChooser_currentIndexChanged(QString text);
     void on_listView_activated(QModelIndex index);
     void on_title_selected(QString title);
+    QString getArticleURL(QString title);
 //    void on_listView_activated(int index);
     void on_searchField_textChanged(QString text);
     void on_open_url(QUrl url);
@@ -61,6 +66,9 @@ public slots:
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);
 //    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();
+    void setUseExternalBrowser(bool value);
+    void setDarkTheme(bool value);
+
 };
 
 #endif // QMLINIT_H

@@ -2,6 +2,7 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import com.nokia.extras 1.0
 
+
 Page {
     id: searchPage
     tools: commonTools
@@ -98,8 +99,13 @@ Page {
                     //console.log(selectedTitle)
                     //                        QmlInit.on_listView_activated(modelIndex[titlesView.model.selectedIndex])
                     //                        QmlInit.on_listView_activated(titlesView.currentIndex)
-                    QmlInit.on_title_selected(selectedTitle)
-                    pageStack.push(titleViewerPage)
+
+                    if (useExternalBrowser){
+                        QmlInit.on_title_selected(selectedTitle)
+                    }else{
+                        articleView.fixUrl(QmlInit.getArticleURL(selectedTitle));
+                        pageStack.push(articleView);
+                    }
                 }
             }
         }
@@ -109,5 +115,8 @@ Page {
         flickableItem: titlesView
     }
 
+    ArticleView{
+        id: articleView
+    }
 
 }

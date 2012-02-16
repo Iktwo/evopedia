@@ -1,6 +1,6 @@
 #include "qmlinit.h"
 
-QmlInit::QmlInit(QWidget *parent)
+QmlInit::QmlInit()
 {
 
     titleListModel=QSharedPointer<TitleListModel>(new TitleListModel());
@@ -37,13 +37,19 @@ QmlInit::QmlInit(QWidget *parent)
     view->rootContext()->setContextProperty("languageSelectionModel", languageListModel.data());
 
     view->setSource(QUrl("qrc:/Main.qml"));
-//    view->showFullScreen();
-    view->show();
+    view->showFullScreen();
 
 //    rootCtxt->setContextProperty("QmlInit",this);
     view->rootContext()->setContextProperty("QmlInit",this);
 
     languageListModel->setStringList(languageList);
+
+    QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
+    useExternalBrowser = (settings->value("useExternalBrowser",false).toBool());
+    darkTheme = (settings->value("darkTheme",true).toBool());
+    rootCtxt->setContextProperty("darkTheme",darkTheme);
+    rootCtxt->setContextProperty("useExternalBrowser",useExternalBrowser);
+    delete settings;
 }
 
 //QmlInit::~QmlInit()
@@ -111,5 +117,26 @@ void QmlInit::on_open_url(QUrl url)
 void QmlInit::on_show_html(QString &html)
 {
     qDebug() << html << endl;
+}
 
+QString QmlInit::getArticleURL(QString title){
+    return (static_cast<EvopediaApplication *>(qApp))->getArticleURL(titleListModel->getTitleFrom(title));;
+}
+
+void QmlInit::setUseExternalBrowser(bool value){
+    useExternalBrowser = value;
+    rootCtxt->setContextProperty("useExternalBrowser", useExternalBrowser);
+
+    QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
+    settings->setValue("useExternalBrowser",useExternalBrowser);
+    delete settings;
+}
+
+void QmlInit::setDarkTheme(bool value){
+    darkTheme = value;
+    rootCtxt->setContextProperty("darkTheme", darkTheme);
+
+    QSettings *settings = new QSettings(QDir::homePath()+"/.evopediarc",QSettings::IniFormat);
+    settings->setValue("darkTheme",darkTheme);
+    delete settings;
 }

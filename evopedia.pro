@@ -36,7 +36,7 @@ OTHER_FILES += \
     src/qml/SettingsPage.qml \
     src/qml/AboutDialog.qml \
     src/qml/TittleBar.qml \
-    src/qml/TitleViewer.qml
+    src/qml/ArticleView.qml
 
 HEADERS += \
     src/bzlib.h \

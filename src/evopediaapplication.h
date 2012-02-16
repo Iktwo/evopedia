@@ -38,8 +38,7 @@ public:
 
     QSharedPointer<Evopedia> evopedia() { return m_evopedia; }
 
-    void openArticle(const QSharedPointer<Title> title)
-    {
+    void openArticle(const QSharedPointer<Title> title){
         QDesktopServices::openUrl(m_evopedia->getArticleUrl(title));
         emit openUrl(m_evopedia->getArticleUrl(title));
     }
@@ -47,6 +46,10 @@ public:
 //    {
 //        emit showHtml(m_evopedia->getArticleHtml());
 //    }
+
+    QString getArticleURL(const QSharedPointer<Title> title){
+        return m_evopedia->getArticleUrl(title).toString();
+    }
 
 
 signals:
