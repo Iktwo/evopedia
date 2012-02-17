@@ -37,6 +37,12 @@ QmlInit::QmlInit(QWidget* parent)
     view->rootContext()->setContextProperty("languageSelectionModel", languageListModel.data());
 
     view->setSource(QUrl("qrc:/Main.qml"));
+
+    view->setAttribute(Qt::WA_OpaquePaintEvent);
+    view->setAttribute(Qt::WA_NoSystemBackground);
+    view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+    view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
+
     view->showFullScreen();
 
 //    rootCtxt->setContextProperty("QmlInit",this);
