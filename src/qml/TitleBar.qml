@@ -3,11 +3,11 @@ import com.nokia.meego 1.0
 
 Column {
 
-        property alias tittle: mainPageTitleText.text;
+        property alias title: mainPageTitleText.text;
         property alias author: mainPageAuthorText.text;
 
         property alias color: mainPageTitle.color;
-        property alias tittleLink: tittleLink.text;
+        property alias titleLink: titleLink.text;
         property alias authorLink: authorLink.text;
 
         id: mainPageColumn
@@ -27,9 +27,9 @@ Column {
                 font.pixelSize: 35
                 color:  "white"
                 MouseArea {
-                    id: mouse_area_tittle
+                    id: mouse_area_title
                     anchors.fill: parent
-                    onClicked: Qt.openUrlExternally(tittleLink.text);
+                    onClicked: Qt.openUrlExternally(titleLink.text);
                 }
             }
 
@@ -52,7 +52,7 @@ Column {
             }
 
             Text {
-                id: tittleLink
+                id: titleLink
                 opacity: 0
             }
         }

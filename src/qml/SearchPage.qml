@@ -11,18 +11,18 @@ Page {
     signal signalSearchTextChanged(string text);
     property string selectedTitle: ""
 
-    TittleBar{
-        id: tittleBar;
+    TitleBar{
+        id: titleBar;
         anchors.top: parent.top
         color: "#1C1C1C";
-        tittle: "Evopedia"
+        title: "Evopedia"
         z:1
     }
 
     TextField {
         id: searchField
         placeholderText: "Search term..."
-        anchors.top: tittleBar.bottom
+        anchors.top: titleBar.bottom
         anchors.topMargin: 10
         anchors.left: parent.left
         anchors.right: btnSearch.left
@@ -42,7 +42,7 @@ Page {
 
     Button {
         id: btnSearch;
-        anchors.top: tittleBar.bottom
+        anchors.top: titleBar.bottom
         anchors.topMargin: 10
         width: 110
         //height: txtFldSearch.height

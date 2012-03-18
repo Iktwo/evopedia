@@ -35,7 +35,7 @@ OTHER_FILES += \
     resources/harmattan/evopedia64.png \
     src/qml/SettingsPage.qml \
     src/qml/AboutDialog.qml \
-    src/qml/TittleBar.qml \
+    src/qml/TitleBar.qml \
     src/qml/ArticleView.qml
 
 HEADERS += \

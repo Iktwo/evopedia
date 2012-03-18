@@ -9,7 +9,7 @@
         <file>TitlesDelegate.qml</file>
         <file>SettingsPage.qml</file>
         <file>AboutDialog.qml</file>
-        <file>TittleBar.qml</file>
+        <file>TitleBar.qml</file>
         <file>ArticleView.qml</file>
         <file>NoArchiveDialog.qml</file>
     </qresource>

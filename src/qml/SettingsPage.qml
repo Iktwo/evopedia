@@ -5,11 +5,11 @@ Page {
     id: settingsPage;
     tools: settingsTools;
 
-    TittleBar{
-        id: tittleBar;
+    TitleBar{
+        id: titleBar;
         anchors.top: parent.top
         color: "#1C1C1C";
-        tittle: "Evopedia"
+        title: "Evopedia"
         author: "Settings"
     }
 
@@ -17,7 +17,7 @@ Page {
         id: btnLanguage
         text: "Language";
         onClicked: langDialog.open()
-        anchors.top: tittleBar.bottom
+        anchors.top: titleBar.bottom
         anchors.topMargin: 10
     }
 
