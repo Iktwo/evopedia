@@ -100,7 +100,7 @@ Page {
                     //                        QmlInit.on_listView_activated(modelIndex[titlesView.model.selectedIndex])
                     //                        QmlInit.on_listView_activated(titlesView.currentIndex)
 
-                    if (useExternalBrowser){
+                    if (evopediaSettings.useExternalBrowser){
                         QmlInit.on_title_selected(selectedTitle)
                     }else{
                         articleView.fixUrl(QmlInit.getArticleURL(selectedTitle));

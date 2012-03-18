@@ -18,6 +18,8 @@
 #include "utils.h"
 #include "defines.h"
 
+#include "evopediasettings.h"
+
 Q_DECLARE_METATYPE(QModelIndex)
 
 class QmlInit : public QObject
@@ -26,6 +28,7 @@ class QmlInit : public QObject
 
 public:
     QmlInit(QWidget *parent = 0);
+
 private:
     QSharedPointer<QDeclarativeView> view;
     QSharedPointer<QmlApplicationViewer> viewer;
@@ -40,10 +43,9 @@ private:
     QString searchPrefix;
     QStringList languageList;
     QSharedPointer<QStringListModelForQML> languageListModel;
-    QSettings *settings;
 //    QDeclarativeContext *rootCtxt;
-    bool useExternalBrowser;
-    bool darkTheme;
+
+    EvopediaSettings settings;
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -66,8 +68,6 @@ public slots:
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);
 //    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();
-    void setUseExternalBrowser(bool value);
-    void setDarkTheme(bool value);
 
 };
 

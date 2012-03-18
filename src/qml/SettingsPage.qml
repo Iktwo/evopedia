@@ -29,7 +29,7 @@ Page {
 
     Switch {
         id: swtTheme;
-        checked: darkTheme;
+        checked: evopediaSettings.darkTheme
         anchors.left: lblTheme.right
         anchors.leftMargin: 10
         anchors.top: btnLanguage.bottom
@@ -39,8 +39,8 @@ Page {
         }*/
 
         onCheckedChanged: {
-            theme.inverted=checked
-            QmlInit.setDarkTheme(swtTheme.checked)
+            theme.inverted = checked
+            evopediaSettings.darkTheme = checked
         }
     }
 
@@ -52,7 +52,7 @@ Page {
 
     Switch {
         id: swtExternalBrowser;
-        checked: useExternalBrowser;
+        checked: evopediaSettings.useExternalBrowser
         anchors.left: lblExternalBrowser.right
         anchors.leftMargin: 10
         anchors.top: swtTheme.bottom
@@ -62,7 +62,7 @@ Page {
         }*/
 
         onCheckedChanged: {
-            QmlInit.setUseExternalBrowser(swtExternalBrowser.checked)
+            evopediaSettings.useExternalBrowser = checked
         }
     }
 

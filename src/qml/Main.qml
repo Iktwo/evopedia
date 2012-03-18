@@ -9,11 +9,7 @@ PageStackWindow {
     SearchPage {
         id: searchPage
         Component.onCompleted: {
-            if (darkTheme){
-                theme.inverted=true;
-            }else{
-                theme.inverted=false;
-            }
+            theme.inverted = evopediaSettings.darkTheme;
         }
     }
 

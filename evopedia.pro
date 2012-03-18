@@ -41,7 +41,8 @@ OTHER_FILES += \
 HEADERS += \
     src/bzlib.h \
     src/qmlinit.h \
-    qstringlistmodelforqml.h
+    qstringlistmodelforqml.h \
+    src/evopediasettings.h
 
 
 contains(MEEGO_EDITION,harmattan) {
@@ -56,7 +57,8 @@ RESOURCES += \
 
 SOURCES += \
     src/qmlinit.cpp \
-    qstringlistmodelforqml.cpp
+    qstringlistmodelforqml.cpp \
+    src/evopediasettings.cpp
 
 
 #OBJECTS_DIR = .obj
