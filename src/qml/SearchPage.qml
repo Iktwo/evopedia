@@ -2,7 +2,6 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 import com.nokia.extras 1.0
 
-
 Page {
     id: searchPage
     tools: commonTools
@@ -78,34 +77,46 @@ Page {
             left: parent.left
             right: parent.right
         }
-        model: visualTitlesModel
         cacheBuffer: 400;
 
-        VisualDataModel {
-            id: visualTitlesModel
-            model: titlesModel
+        model: titlesModel
 
-            delegate:
-                ListDelegate{
+        delegate:
+            Rectangle {
+                id: delegateRectangle
+                property int titleSize: 32
+                property color titleColor: theme.inverted ? "#ffffff" : "#282828"
+                property color titleColorPressed: theme.inverted ? "#797979" : "#797979"
+
+                height: 64
+                width: parent.width
+                color: (mouseArea.pressed ? "#BBB" : "white")
 
                 Label {
                     id: titleText
-                    text: name
                     anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width
+                    text: name
+                    font.pixelSize: delegateRectangle.titleSize
+                    color: mouseArea.pressed ? delegateRectangle.titleColorPressed : delegateRectangle.titleColor
+                    wrapMode: Text.NoWrap
                 }
+                MouseArea {
+                    id: mouseArea
+                    anchors.fill: parent
+                    onClicked: {
+                        selectedTitle = name
 
-                onClicked: {
-                    selectedTitle = name
-
-                    if (evopediaSettings.useExternalBrowser){
-                        evopedia.on_title_selected(selectedTitle)
-                    }else{
-                        articleView.fixUrl(evopedia.getArticleURL(selectedTitle));
-                        pageStack.push(articleView);
+                        if (evopediaSettings.useExternalBrowser){
+                            evopedia.on_title_selected(selectedTitle)
+                        } else{
+                            articleView.fixUrl(evopedia.getArticleURL(selectedTitle));
+                            pageStack.push(articleView);
+                        }
                     }
                 }
             }
-        }
+
     }
 
     ScrollDecorator {
