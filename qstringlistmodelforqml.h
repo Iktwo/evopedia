@@ -4,20 +4,32 @@
 #include <QObject>
 #include <QStringListModel>
 
-class QStringListModelForQML : public QStringListModel
+class QStringListModelForQML : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    explicit QStringListModelForQML(const QByteArray &displayRoleName = "name", QObject *parent = 0);
+    enum Roles {
+        CustomRole = Qt::UserRole + 1
+    };
+
+    Q_PROPERTY(int size
+               READ getSize)
+
+    explicit QStringListModelForQML(const QByteArray &roleName = "name");
+
     void setStringList(const QStringList &strings);
+
+    QVariant data(const QModelIndex &index, int role) const;
+
+    int rowCount(const QModelIndex&) const;
+
+    int getSize() const;
+
+public slots:
+    QString get(int i) const;
     
-signals:
-
-//    void stringAdded(const QString &newString);
-    void stringAdded(QVariant newString);
-    // Emitted when setStringList is called if already contained strings
-    void stringsReset();
-
+private:
+    QStringList list;
 };
 
 #endif // QSTRINGLISTMODELFORQML_H

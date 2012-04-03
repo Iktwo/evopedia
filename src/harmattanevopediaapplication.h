@@ -24,10 +24,22 @@ Q_DECLARE_METATYPE(QModelIndex)
 
 class HarmattanEvopediaApplication : public QApplication
 {
-    Q_OBJECT
+    Q_OBJECT    
 
 public:
+
+    Q_PROPERTY(QString searchPrefix
+               READ getSearchPrefix
+               WRITE setSearchPrefix
+               NOTIFY searchPrefixChanged)
+
     HarmattanEvopediaApplication(int& argc, char** argv);
+
+    QString getSearchPrefix() const;
+    void setSearchPrefix(QString s);
+
+signals:
+    void searchPrefixChanged();
 
 private:
     void openArticle(const QSharedPointer<Title> title);
@@ -35,36 +47,21 @@ private:
 private:
     QSharedPointer<QDeclarativeView> view;
 
-    QSharedPointer<TitleListModel> titleListModel;
-//    MapWindow *mapWindow;
-//    DumpSettings *dumpSettings;
-    Evopedia evopedia;
-    QString lang;
-    QString searchPrefix;
-    QStringList languageList;
-    QSharedPointer<QStringListModelForQML> languageListModel;
-//    QDeclarativeContext *rootCtxt;
+    QSharedPointer<Evopedia> evopedia;
+    QSharedPointer<EvopediaSettings> settings;
 
-    EvopediaSettings settings;
+    QSharedPointer<QStringListModelForQML> languageListModel;
+    QSharedPointer<TitleListModel> titleListModel;
+
+    QString searchPrefix;
 
 protected:
     void closeEvent(QCloseEvent *event);
 
 public slots:
-//    void on_actionDeny_toggled(bool v);
-//    void on_actionAllow_toggled(bool v);
-//    void on_actionAuto_toggled(bool v);
-//    void on_actionConfigure_Dumps_triggered();
-//    void on_actionMap_triggered();
-//    void on_actionAbout_triggered();
-    void on_languageChooser_currentIndexChanged(QString text);
     void on_listView_activated(QModelIndex index);
     void on_title_selected(QString title);
     QString getArticleURL(QString title);
-//    void on_listView_activated(int index);
-    void on_searchField_textChanged(QString text);
-//    void mapViewRequested(qreal lat, qreal lon, uint zoom);
-//    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();
 
 };

@@ -70,24 +70,20 @@ Page {
     SelectionDialog {
         id: langDialog
         titleText: qsTr("Language")
-        selectedIndex: 0
+
+        selectedIndex: evopediaSettings.languageIndex
+
         model: ListModel { }
+
         onAccepted: {
-            languageButton.text = langDialog.model.get(langDialog.selectedIndex).name
-            searchPage.signalLanguageChanged(langDialog.model.get(langDialog.selectedIndex).name)
-            evopedia.on_languageChooser_currentIndexChanged(langDialog.model.get(langDialog.selectedIndex).name)
+            evopediaSettings.languageIndex = selectedIndex
         }
 
-        onRejected: {
-            selectedIndex = 0
-            searchPage.signalLanguageChanged(langDialog.model.get(langDialog.selectedIndex).name)
-        }
-    }
-
-    Connections{
-        target: languageSelectionModel
-        onStringAdded: {
-            langDialog.model.append({name: newString})
+        Component.onCompleted: {
+            model.clear()
+            var i = 0;
+            for (i = 0; i < languageListModel.size; i++)
+                model.append({name: languageListModel.get(i)});
         }
     }
 }

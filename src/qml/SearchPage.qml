@@ -6,8 +6,6 @@ Page {
     id: searchPage
     tools: commonTools
 
-    signal signalLanguageChanged(string lang);
-    signal signalSearchTextChanged(string text);
     property string selectedTitle: ""
 
     Column {
@@ -29,13 +27,13 @@ Page {
 
             TextField {
                 id: searchField
+                text: evopedia.searchPrefix
                 placeholderText: "Search term..."
                 width: parent.width - btnSearch.width - parent.spacing
                 anchors.verticalCenter: parent.verticalCenter
 
                 onTextChanged: {
-                    searchPage.signalSearchTextChanged(searchField.text)
-                    evopedia.on_searchField_textChanged(searchField.text)
+                    evopedia.searchPrefix = searchField.text
                 }
 
                 platformSipAttributes: SipAttributes{
@@ -117,5 +115,4 @@ Page {
     ArticleView{
         id: articleView
     }
-
 }
