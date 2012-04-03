@@ -1,16 +1,19 @@
-#include "qmlinit.h"
+#include "harmattanevopediaapplication.h"
 
-QmlInit::QmlInit(QWidget* parent)
-{
+HarmattanEvopediaApplication::HarmattanEvopediaApplication(int& argc, char** argv)
+    : QApplication(argc, argv) {
 
     titleListModel=QSharedPointer<TitleListModel>(new TitleListModel());
     languageList.reserve(1);
     searchPrefix=QString("");
 
-    // set up the evopedia specifics
+    view = QSharedPointer<QDeclarativeView>(new QDeclarativeView());
+
+    // Set up the models
+
     titleListModel->setTitleIterator(TitleIterator());
-    evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
-    foreach (LocalArchive *b, evopedia->getArchiveManager()->getDefaultLocalArchives())
+
+    foreach (LocalArchive *b, evopedia.getArchiveManager()->getDefaultLocalArchives())
     {
         qDebug() << b->getLanguage();
         lang = b->getLanguage(); //DEBUG
@@ -18,16 +21,13 @@ QmlInit::QmlInit(QWidget* parent)
         on_languageChooser_currentIndexChanged(lang);
         refreshSearchResults();
     }
-    //    languageList << "spanish" << "german";
-
     languageListModel = QSharedPointer<QStringListModelForQML>(new QStringListModelForQML());
     languageListModel->setStringList(languageList);
 
-    // define the view and context for QML interaction
-    view = QSharedPointer<QDeclarativeView>(new QDeclarativeView());
+    // Export some C++ objects to QML.
     view->rootContext()->setContextProperty("titlesModel", titleListModel.data());
     view->rootContext()->setContextProperty("languageSelectionModel", languageListModel.data());
-    view->rootContext()->setContextProperty("QmlInit", this);
+    view->rootContext()->setContextProperty("evopedia", this);
     view->rootContext()->setContextProperty("evopediaSettings", &settings);
 
     view->setSource(QUrl("qrc:/Main.qml"));
@@ -40,7 +40,7 @@ QmlInit::QmlInit(QWidget* parent)
     view->showFullScreen();
 }
 
-void QmlInit::on_languageChooser_currentIndexChanged(QString text)
+void HarmattanEvopediaApplication::on_languageChooser_currentIndexChanged(QString text)
 {
     //    QDeclarativeContext *rootCtxt = view->rootCtxt();
     QObject* rootObject = view->rootObject();
@@ -54,17 +54,16 @@ void QmlInit::on_languageChooser_currentIndexChanged(QString text)
     refreshSearchResults();
 }
 
-void QmlInit::on_searchField_textChanged(QString text)
+void HarmattanEvopediaApplication::on_searchField_textChanged(QString text)
 {
     searchPrefix=text;
     refreshSearchResults();
 }
 
 
-void QmlInit::refreshSearchResults()
+void HarmattanEvopediaApplication::refreshSearchResults()
 {
-    QSharedPointer<Evopedia> evopedia = (static_cast<EvopediaApplication *>(qApp))->evopedia();
-    LocalArchive *backend = evopedia->getArchiveManager()->getLocalArchive(lang);
+    LocalArchive *backend = evopedia.getArchiveManager()->getLocalArchive(lang);
     TitleIterator it;
     if (backend != 0)
         it = backend->getTitlesWithPrefix(searchPrefix);
@@ -72,36 +71,25 @@ void QmlInit::refreshSearchResults()
     titleListModel->setTitleIterator(it);
 }
 
-void QmlInit::on_listView_activated(QModelIndex index)
+void HarmattanEvopediaApplication::on_listView_activated(QModelIndex index)
 {
-    (static_cast<EvopediaApplication *>(qApp))->openArticle(titleListModel->getTitleAt(index));
+    openArticle(titleListModel->getTitleAt(index));
 }
 
-void QmlInit::on_title_selected(QString title)
+void HarmattanEvopediaApplication::on_title_selected(QString title)
 {
-    (static_cast<EvopediaApplication *>(qApp))->openArticle(titleListModel->getTitleFrom(title));
+    openArticle(titleListModel->getTitleFrom(title));
 }
 
-void QmlInit::on_open_url(QUrl url)
-{
+void HarmattanEvopediaApplication::openArticle(const QSharedPointer<Title> title){
+    QUrl url = evopedia.getArticleUrl(title);
+    QDesktopServices::openUrl(url);
 
-//    QDeclarativeEngine engine;
-//    QDeclarativeComponent component(&engine, "qrc:/TitleViewer.qml");
-//    QObject *object = component.create();
-
-//    view->rootObject()->setProperty("titelUrl", url.toString());
-//    QDeclarativeContext *rootCtxt = new QDeclarativeContext(view->rootContext());
-//    rootCtxt->setProperty("titelUrl", url.toString());
     view->rootContext()->setProperty("titelUrl", url.toString());
 
-    qDebug() << url << endl;
+    qDebug() << url.toString() << endl;
 }
 
-void QmlInit::on_show_html(QString &html)
-{
-    qDebug() << html << endl;
-}
-
-QString QmlInit::getArticleURL(QString title){
-    return (static_cast<EvopediaApplication *>(qApp))->getArticleURL(titleListModel->getTitleFrom(title));;
+QString HarmattanEvopediaApplication::getArticleURL(QString title){
+    return evopedia.getArticleUrl(titleListModel->getTitleFrom(title)).toString();
 }

@@ -27,7 +27,6 @@
 #include <QSharedPointer>
 #include "evopedia.h"
 #include "mainwindow.h"
-#include "qmlinit.h"
 
 class EvopediaApplication : public QApplication
 {

@@ -75,7 +75,7 @@ Page {
         onAccepted: {
             languageButton.text = langDialog.model.get(langDialog.selectedIndex).name
             searchPage.signalLanguageChanged(langDialog.model.get(langDialog.selectedIndex).name)
-            QmlInit.on_languageChooser_currentIndexChanged(langDialog.model.get(langDialog.selectedIndex).name)
+            evopedia.on_languageChooser_currentIndexChanged(langDialog.model.get(langDialog.selectedIndex).name)
         }
 
         onRejected: {

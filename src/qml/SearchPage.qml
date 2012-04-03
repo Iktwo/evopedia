@@ -30,7 +30,7 @@ Page {
         z:1
         onTextChanged: {
             searchPage.signalSearchTextChanged(searchField.text)
-            QmlInit.on_searchField_textChanged(searchField.text)
+            evopedia.on_searchField_textChanged(searchField.text)
         }
 
         platformSipAttributes: SipAttributes{
@@ -96,14 +96,11 @@ Page {
 
                 onClicked: {
                     selectedTitle = name
-                    //console.log(selectedTitle)
-                    //                        QmlInit.on_listView_activated(modelIndex[titlesView.model.selectedIndex])
-                    //                        QmlInit.on_listView_activated(titlesView.currentIndex)
 
                     if (evopediaSettings.useExternalBrowser){
-                        QmlInit.on_title_selected(selectedTitle)
+                        evopedia.on_title_selected(selectedTitle)
                     }else{
-                        articleView.fixUrl(QmlInit.getArticleURL(selectedTitle));
+                        articleView.fixUrl(evopedia.getArticleURL(selectedTitle));
                         pageStack.push(articleView);
                     }
                 }

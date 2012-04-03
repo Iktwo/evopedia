@@ -1,5 +1,5 @@
-#ifndef QMLINIT_H
-#define QMLINIT_H
+#ifndef HARMATTAN_EVOPEDIA_APPLICATION_H
+#define HARMATTAN_EVOPEDIA_APPLICATION_H
 
 #include <QTimer>
 #include <QString>
@@ -22,23 +22,23 @@
 
 Q_DECLARE_METATYPE(QModelIndex)
 
-class QmlInit : public QObject
+class HarmattanEvopediaApplication : public QApplication
 {
     Q_OBJECT
 
 public:
-    QmlInit(QWidget *parent = 0);
+    HarmattanEvopediaApplication(int& argc, char** argv);
+
+private:
+    void openArticle(const QSharedPointer<Title> title);
 
 private:
     QSharedPointer<QDeclarativeView> view;
-    QSharedPointer<QmlApplicationViewer> viewer;
-//    QSharedPointer<QDeclarativeContext> rootCtxt;
-//    QDeclarativeContext *ctxt;
 
     QSharedPointer<TitleListModel> titleListModel;
 //    MapWindow *mapWindow;
 //    DumpSettings *dumpSettings;
-    QSharedPointer<Evopedia> evopedia;
+    Evopedia evopedia;
     QString lang;
     QString searchPrefix;
     QStringList languageList;
@@ -63,12 +63,10 @@ public slots:
     QString getArticleURL(QString title);
 //    void on_listView_activated(int index);
     void on_searchField_textChanged(QString text);
-    void on_open_url(QUrl url);
-    void on_show_html(QString &html);
 //    void mapViewRequested(qreal lat, qreal lon, uint zoom);
 //    void backendsChanged(QList<LocalArchive *>backends);
     void refreshSearchResults();
 
 };
 
-#endif // QMLINIT_H
+#endif // HARMATTAN_EVOPEDIA_APPLICATION_H

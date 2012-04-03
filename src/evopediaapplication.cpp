@@ -28,7 +28,6 @@
 #include "qmlapplicationviewer/qmlapplicationviewer.h"
 #include "mainwindow.h"
 #include "utils.h"
-#include "qmlinit.h"
 
 EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
     QApplication(argc, argv)
@@ -48,7 +47,6 @@ EvopediaApplication::EvopediaApplication(int &argc, char **argv) :
 
 
     m_evopedia = QSharedPointer<Evopedia>(new Evopedia(this));
-//    QmlInit *setupQml = new QmlInit();
 //    m_mainwindow = new MainWindow();
 
 #if defined(Q_WS_S60)
@@ -62,18 +60,4 @@ EvopediaApplication::~EvopediaApplication()
 {
     if(m_mainwindow!=NULL)
         delete m_mainwindow;
-}
-
-Q_DECL_EXPORT main(int argc, char *argv[])
-{
-    /* initialize random number generator */
-
-    QScopedPointer<EvopediaApplication> app(new EvopediaApplication(argc,argv));
-
-    QSharedPointer<QmlInit> setupQml= QSharedPointer<QmlInit>(new QmlInit());
-
-    QObject::connect(app.data(),SIGNAL(openUrl(QUrl)),setupQml.data(),SLOT(on_open_url(QUrl)));
-//    QObject::connect(app.data(),SIGNAL(showHtml(QString&)),setupQml.data(),SLOT(on_show_html(QString&)));
-
-    return app->exec();
 }
