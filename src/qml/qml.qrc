@@ -12,5 +12,7 @@
         <file>TitleBar.qml</file>
         <file>ArticleView.qml</file>
         <file>NoArchiveDialog.qml</file>
+        <file>ExtendedWebView.qml</file>
+        <file>FlickableWebView.qml</file>
     </qresource>
 </RCC>

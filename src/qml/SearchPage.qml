@@ -99,7 +99,7 @@ Page {
                             if (evopediaSettings.useExternalBrowser){
                                 evopedia.on_title_selected(selectedTitle)
                             } else{
-                                articleView.fixUrl(evopedia.getArticleURL(selectedTitle));
+                                articleView.url = evopedia.getArticleURL(selectedTitle)
                                 pageStack.push(articleView);
                             }
                         }
@@ -112,7 +112,7 @@ Page {
         }
     }
 
-    ArticleView{
+    ArticleView {
         id: articleView
     }
 }
