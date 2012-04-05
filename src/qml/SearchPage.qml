@@ -32,7 +32,7 @@ Page {
                 id: searchField
                 text: evopedia.searchPrefix
                 placeholderText: qsTr("Search term...")
-                width: parent.width - btnClear.width - parent.spacing
+                width: parent.width - btnClear.width -btnSettings.width - parent.spacing * 2.5
                 anchors.verticalCenter: parent.verticalCenter
 
                 // Do not use predictive text (i.e. dictionary lookup) while typing.
@@ -57,7 +57,7 @@ Page {
 
             Button {
                 id: btnClear;
-                width: 110
+                width: 50
                 anchors.verticalCenter: parent.verticalCenter
 
                 iconSource: theme.inverted ?
@@ -68,6 +68,20 @@ Page {
                 onClicked: {
                     searchField.text = ""
                     searchField.focus = true
+                }
+            }
+            Button {
+                id: btnSettings;
+                width: 50
+                anchors.verticalCenter: parent.verticalCenter
+
+                iconSource: theme.inverted ?
+                                (pressed ? "image://theme/icon-m-toolbar-settings-white-selected"
+                                         : "image://theme/icon-m-toolbar-settings-white")
+                              : (pressed ? "image://theme/icon-m-toolbar-settings-selected"
+                                         : "image://theme/icon-m-toolbar-settings")
+                onClicked: {
+                    pageStack.push(settingsPage);
                 }
             }
         }
