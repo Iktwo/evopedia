@@ -114,6 +114,14 @@ Page {
             ScrollDecorator {
                 flickableItem: titlesView
             }
+
+            Text {
+                text: qsTr("No results")
+                anchors.centerIn: parent
+                visible: titlesView.count == 0
+                font.pixelSize: 35
+                color: theme.inverted ? "white" : "black"
+            }
         }
     }
 
