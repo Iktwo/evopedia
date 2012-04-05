@@ -68,25 +68,6 @@ void HarmattanEvopediaApplication::refreshSearchResults()
     titleListModel->setTitleIterator(it);
 }
 
-void HarmattanEvopediaApplication::on_listView_activated(QModelIndex index)
-{
-    openArticle(titleListModel->getTitleAt(index));
-}
-
-void HarmattanEvopediaApplication::on_title_selected(QString title)
-{
-    openArticle(titleListModel->getTitleFrom(title));
-}
-
-void HarmattanEvopediaApplication::openArticle(const QSharedPointer<Title> title){
-    QUrl url = evopedia->getArticleUrl(title);
-    QDesktopServices::openUrl(url);
-
-    view->rootContext()->setProperty("titelUrl", url.toString());
-
-    qDebug() << url.toString() << endl;
-}
-
 QString HarmattanEvopediaApplication::getArticleURL(QString title){
     return evopedia->getArticleUrl(titleListModel->getTitleFrom(title)).toString();
 }

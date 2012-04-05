@@ -101,10 +101,12 @@ Page {
                         onClicked: {
                             selectedTitle = name
 
+                            var url = evopedia.getArticleURL(selectedTitle)
+
                             if (evopediaSettings.useExternalBrowser){
-                                evopedia.on_title_selected(selectedTitle)
-                            } else{
-                                articleView.url = evopedia.getArticleURL(selectedTitle)
+                                Qt.openUrlExternally(url)
+                            } else {
+                                articleView.url = url
                                 pageStack.push(articleView);
                             }
                         }

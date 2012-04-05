@@ -42,9 +42,6 @@ signals:
     void searchPrefixChanged();
 
 private:
-    void openArticle(const QSharedPointer<Title> title);
-
-private:
     QSharedPointer<QDeclarativeView> view;
 
     QSharedPointer<Evopedia> evopedia;
@@ -59,11 +56,9 @@ protected:
     void closeEvent(QCloseEvent *event);
 
 public slots:
-    void on_listView_activated(QModelIndex index);
-    void on_title_selected(QString title);
     QString getArticleURL(QString title);
-    void refreshSearchResults();
 
+    void refreshSearchResults();
 };
 
 #endif // HARMATTAN_EVOPEDIA_APPLICATION_H
