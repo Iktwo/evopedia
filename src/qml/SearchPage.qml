@@ -32,6 +32,11 @@ Page {
                 width: parent.width - btnClear.width - parent.spacing
                 anchors.verticalCenter: parent.verticalCenter
 
+                // Do not use predictive text (i.e. dictionary lookup) while typing.
+                // This causes the onTextChanged signal to be emitted for each typed
+                // character, instead of for each typed word.
+                inputMethodHints: 32
+
                 Keys.onReturnPressed: {
                     titlesView.focus = true
                 }
