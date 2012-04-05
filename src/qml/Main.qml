@@ -31,7 +31,11 @@ PageStackWindow {
         visible: false;
         ToolIcon {
             platformIconId: "toolbar-back";
-            onClicked: {settingsMenu.close(); pageStack.pop() }
+            onClicked: {
+                settingsMenu.close();
+                pageStack.pop()
+                pageStack.currentPage.focusSearchField()
+            }
         }
         ToolIcon {
             platformIconId: "toolbar-view-menu"

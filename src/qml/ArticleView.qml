@@ -21,8 +21,10 @@ Page {
             onClicked: {
                 if (webView.back.enabled)
                     webView.back.trigger()
-                else
+                else {
                     pageStack.pop()
+                    pageStack.currentPage.focusSearchField()
+                }
             }
         }
     }

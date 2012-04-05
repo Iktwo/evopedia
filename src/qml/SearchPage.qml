@@ -1,12 +1,15 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import com.nokia.extras 1.0
 
 Page {
     id: searchPage
     tools: commonTools
 
     property string selectedTitle: ""
+
+    function focusSearchField() {
+        searchField.focus = true
+    }
 
     Column {
         anchors.fill: parent
@@ -159,6 +162,7 @@ Page {
                         onClicked: {
                             evopediaSettings.languageIndex = index
                             languageRadioList.currentIndex = evopediaSettings.languageIndex
+                            searchField.focus = true
                         }
 
                         onPressAndHold: {
@@ -174,5 +178,13 @@ Page {
                 }
             }
         }
+    }
+
+
+    Timer {
+        interval: 50
+        running: true
+        repeat: false
+        onTriggered: searchField.focus = true
     }
 }
