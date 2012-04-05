@@ -28,7 +28,7 @@ Page {
             TextField {
                 id: searchField
                 text: evopedia.searchPrefix
-                placeholderText: "Search term..."
+                placeholderText: qsTr("Search term...")
                 width: parent.width - btnSearch.width - parent.spacing
                 anchors.verticalCenter: parent.verticalCenter
 
@@ -42,7 +42,7 @@ Page {
 
                 platformSipAttributes: SipAttributes{
                     actionKeyIcon: "qrc:/meego/search_sip_attribute.png"
-                    actionKeyLabel: "Search"
+                    actionKeyLabel: qsTr("Search")
                     actionKeyHighlighted: true
                 }
             }

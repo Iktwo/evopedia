@@ -9,13 +9,12 @@ Page {
         id: titleBar;
         anchors.top: parent.top
         color: "#1C1C1C";
-        title: "Evopedia"
-        author: "Settings"
+        title: qsTr("Settings")
     }
 
     Button{
         id: btnLanguage
-        text: "Language";
+        text: qsTr("Language")
         onClicked: langDialog.open()
         anchors.top: titleBar.bottom
         anchors.topMargin: 10
@@ -23,7 +22,7 @@ Page {
 
     Label{
         id: lblTheme
-        text: "Dark Theme"
+        text: qsTr("Dark Theme")
         anchors.verticalCenter: swtTheme.verticalCenter
     }
 
@@ -46,7 +45,7 @@ Page {
 
     Label{
         id: lblExternalBrowser
-        text: "Use external browser"
+        text: qsTr("Use external browser")
         anchors.verticalCenter: swtExternalBrowser.verticalCenter
     }
 
