@@ -64,6 +64,7 @@ Page {
             id: titlesView
             width: parent.width
             height: parent.height - titleBar.height - searchBar.height
+            spacing: 1
 
             // We don't want the list to be visible under the search button/field when dragged.
             clip: true
