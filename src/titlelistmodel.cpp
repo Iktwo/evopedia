@@ -65,7 +65,7 @@ void TitleListModel::fetchMore(const QModelIndex &parent)
     while (titleIter.hasNext() && newTitles.size() < 50) {
         newTitles += titleIter.next();
     }
-    beginInsertRows(QModelIndex(), titles.size(), titles.size() + newTitles.size());
+    beginInsertRows(QModelIndex(), titles.size(), titles.size() + newTitles.size() - 1);
     titles += newTitles;
     endInsertRows();
 
