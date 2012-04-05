@@ -44,8 +44,14 @@ import com.nokia.meego 1.0
 
 Rectangle {
     id: extendedWebView
-
-    property alias url : webView.url
+    property alias title: webView.title
+    property alias icon: webView.icon
+    property alias progress: webView.progress
+    property alias url: webView.url
+    property alias back: webView.back
+    property alias stop: webView.stop
+    property alias reload: webView.reload
+    property alias forward: webView.forward
 
     FlickableWebView {
         id: webView

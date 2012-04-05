@@ -12,4 +12,18 @@ Page {
         id: webView
         anchors.fill: parent
     }
+
+    ToolBarLayout {
+        id: articleTools
+        ToolIcon {
+            platformIconId: "toolbar-back";
+            anchors.left: (parent === undefined) ? undefined : parent.left
+            onClicked: {
+                if (webView.back.enabled)
+                    webView.back.trigger()
+                else
+                    pageStack.pop()
+            }
+        }
+    }
 }

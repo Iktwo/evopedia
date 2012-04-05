@@ -120,8 +120,7 @@ Page {
                                 if (evopediaSettings.useExternalBrowser){
                                     Qt.openUrlExternally(url)
                                 } else {
-                                    articleView.url = url
-                                    pageStack.push(articleView);
+                                    pageStack.push(Qt.resolvedUrl("ArticleView.qml"), {url: url});
                                 }
                             }
                         }
@@ -175,9 +174,5 @@ Page {
                 }
             }
         }
-    }
-
-    ArticleView {
-        id: articleView
     }
 }
