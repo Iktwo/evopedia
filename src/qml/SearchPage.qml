@@ -29,7 +29,7 @@ Page {
                 id: searchField
                 text: evopedia.searchPrefix
                 placeholderText: qsTr("Search term...")
-                width: parent.width - btnSearch.width - parent.spacing
+                width: parent.width - btnClear.width - parent.spacing
                 anchors.verticalCenter: parent.verticalCenter
 
                 Keys.onReturnPressed: {
@@ -48,81 +48,126 @@ Page {
             }
 
             Button {
-                id: btnSearch;
+                id: btnClear;
                 width: 110
                 anchors.verticalCenter: parent.verticalCenter
 
                 iconSource: theme.inverted ?
-                                (pressed ? "image://theme/icon-m-toolbar-search-white-selected"
-                                         : "image://theme/icon-m-toolbar-search-white")
-                              : (pressed ? "image://theme/icon-m-toolbar-search-selected"
-                                         : "image://theme/icon-m-toolbar-search")
+                                (pressed ? "image://theme/icon-m-toolbar-backspace-white-selected"
+                                         : "image://theme/icon-m-toolbar-backspace-white")
+                              : (pressed ? "image://theme/icon-m-toolbar-backspace-selected"
+                                         : "image://theme/icon-m-toolbar-backspace")
+                onClicked: {
+                    searchField.text = ""
+                    searchField.focus = true
+                }
             }
         }
 
-        ListView {
-            id: titlesView
+        Rectangle {
             width: parent.width
             height: parent.height - titleBar.height - searchBar.height
-            spacing: 1
+            color: (theme.inverted ? "black" : "light gray")
 
-            // We don't want the list to be visible under the search button/field when dragged.
-            clip: true
+            ListView {
+                anchors.fill: parent
+                id: titlesView
+                spacing: 1
+                visible: searchField.text != ""
 
-            cacheBuffer: 400;
+                // We don't want the list to be visible under the search button/field when dragged.
+                clip: true
 
-            model: titlesModel
+                cacheBuffer: 400;
 
-            delegate:
-                Rectangle {
-                    id: delegateRectangle
-                    property int titleSize: 32
-                    property color titleColor: theme.inverted ? "#ffffff" : "#282828"
-                    property color titleColorPressed: theme.inverted ? "#797979" : "#797979"
-                    property color titleBackground: theme.inverted ? "#000" : "#fff"
-                    property color titleBackgroundPressed: theme.inverted ? "#555" : "#BBB"
+                model: titlesModel
 
-                    height: 64
-                    width: parent.width
-                    color: (mouseArea.pressed ? titleBackgroundPressed : titleBackground)
+                delegate:
+                    Rectangle {
+                        id: delegateRectangle
+                        property int titleSize: 32
+                        property color titleColor: theme.inverted ? "#ffffff" : "#282828"
+                        property color titleColorPressed: theme.inverted ? "#797979" : "#797979"
+                        property color titleBackground: theme.inverted ? "#000" : "#fff"
+                        property color titleBackgroundPressed: theme.inverted ? "#555" : "#BBB"
 
-                    Label {
-                        id: titleText
-                        anchors.verticalCenter: parent.verticalCenter
+                        height: 64
                         width: parent.width
-                        text: name
-                        font.pixelSize: delegateRectangle.titleSize
-                        color: mouseArea.pressed ? delegateRectangle.titleColorPressed : delegateRectangle.titleColor
-                        wrapMode: Text.NoWrap
-                    }
-                    MouseArea {
-                        id: mouseArea
-                        anchors.fill: parent
-                        onClicked: {
-                            selectedTitle = name
+                        color: (mouseArea.pressed ? titleBackgroundPressed : titleBackground)
 
-                            var url = evopedia.getArticleURL(selectedTitle)
+                        Label {
+                            id: titleText
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width
+                            text: name
+                            font.pixelSize: delegateRectangle.titleSize
+                            color: mouseArea.pressed ? delegateRectangle.titleColorPressed : delegateRectangle.titleColor
+                            wrapMode: Text.NoWrap
+                        }
+                        MouseArea {
+                            id: mouseArea
+                            anchors.fill: parent
+                            onClicked: {
+                                selectedTitle = name
 
-                            if (evopediaSettings.useExternalBrowser){
-                                Qt.openUrlExternally(url)
-                            } else {
-                                articleView.url = url
-                                pageStack.push(articleView);
+                                var url = evopedia.getArticleURL(selectedTitle)
+
+                                if (evopediaSettings.useExternalBrowser){
+                                    Qt.openUrlExternally(url)
+                                } else {
+                                    articleView.url = url
+                                    pageStack.push(articleView);
+                                }
                             }
                         }
                     }
-                }
 
-            ScrollDecorator {
-                flickableItem: titlesView
+                ScrollDecorator {
+                    flickableItem: titlesView
+                }
             }
 
             Text {
                 text: qsTr("No results")
                 anchors.centerIn: parent
-                visible: titlesView.count == 0
+                visible: titlesView.visible && titlesView.count == 0
                 font.pixelSize: 35
                 color: theme.inverted ? "white" : "black"
+            }
+
+            ListView {
+                anchors.fill: parent
+                id: languageRadioList
+                spacing: 1
+                visible: searchField.text == ""
+
+                // We don't want the list to be visible under the search button/field when dragged.
+                clip: true
+
+                cacheBuffer: 400;
+
+                model: ListModel { }
+
+                delegate:
+                    RadioListItem {
+                        text: name
+                        checked: ListView.isCurrentItem
+                        onClicked: {
+                            evopediaSettings.languageIndex = index
+                            languageRadioList.currentIndex = evopediaSettings.languageIndex
+                        }
+
+                        onPressAndHold: {
+                        }
+                    }
+
+                Component.onCompleted: {
+                    model.clear()
+                    var i = 0;
+                    for (i = 0; i < languageListModel.size; i++)
+                        model.append({name: languageListModel.get(i), index: i});
+                    languageRadioList.currentIndex = evopediaSettings.languageIndex
+                }
             }
         }
     }

@@ -38,7 +38,8 @@ OTHER_FILES += \
     src/qml/TitleBar.qml \
     src/qml/ArticleView.qml \
     src/qml/FlickableWebView.qml \
-    src/qml/ExtendedWebView.qml
+    src/qml/ExtendedWebView.qml \
+    src/qml/RadioListItem.qml
 
 HEADERS += \
     src/bzlib.h \

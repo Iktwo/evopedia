@@ -14,5 +14,6 @@
         <file>NoArchiveDialog.qml</file>
         <file>ExtendedWebView.qml</file>
         <file>FlickableWebView.qml</file>
+        <file>RadioListItem.qml</file>
     </qresource>
 </RCC>
