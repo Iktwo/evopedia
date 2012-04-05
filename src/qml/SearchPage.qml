@@ -32,6 +32,10 @@ Page {
                 width: parent.width - btnSearch.width - parent.spacing
                 anchors.verticalCenter: parent.verticalCenter
 
+                Keys.onReturnPressed: {
+                    titlesView.focus = true
+                }
+
                 onTextChanged: {
                     evopedia.searchPrefix = searchField.text
                 }
