@@ -23,7 +23,7 @@ Page {
                     webView.back.trigger()
                 else {
                     pageStack.pop()
-                    pageStack.currentPage.focusSearchField()
+                    searchPage.acquireFocus()
                 }
             }
         }

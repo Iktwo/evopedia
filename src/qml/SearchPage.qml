@@ -7,8 +7,9 @@ Page {
 
     property string selectedTitle: ""
 
-    function focusSearchField() {
+    function acquireFocus() {
         searchField.focus = true
+        searchField.selectAll()
     }
 
     Column {
@@ -199,6 +200,6 @@ Page {
         interval: 50
         running: true
         repeat: false
-        onTriggered: searchField.focus = true
+        onTriggered: acquireFocus()
     }
 }

@@ -34,7 +34,7 @@ PageStackWindow {
             onClicked: {
                 settingsMenu.close();
                 pageStack.pop()
-                pageStack.currentPage.focusSearchField()
+                searchPage.acquireFocus()
             }
         }
         ToolIcon {
