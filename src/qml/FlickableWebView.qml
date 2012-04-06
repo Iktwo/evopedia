@@ -137,10 +137,6 @@ Flickable {
                 contentsScale = 1
             }
             onUrlChanged: {
-                // got to topleft
-                flickable.contentX = 0
-                flickable.contentY = 0
-
                 // zoom out
                 contentsScale = 1
             }
