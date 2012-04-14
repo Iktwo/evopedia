@@ -51,7 +51,7 @@ void HarmattanEvopediaApplication::setSearchPrefix(QString s) {
 
 void HarmattanEvopediaApplication::refreshSearchResults()
 {
-    if (settings->getLanguageIndex() == -1) {
+    if (settings->getLanguageIndex() == -1 || searchPrefix.isEmpty()) {
         titleListModel->setTitleIterator(TitleIterator());
         return;
     }

@@ -5,7 +5,6 @@ import "qml_constants.js" as UI
 
 Page {
     id: searchPage
-    tools: commonTools
 
     property bool landscape: screen.rotation == 0
 
@@ -24,6 +23,7 @@ Page {
             width: parent.width
             anchors.topMargin: 10
             anchors.bottomMargin: 10
+            z: 1
 
             property int spacing: 8
             property int rowHeight: searchField.implicitHeight + 8
@@ -151,9 +151,7 @@ Page {
                                              : "image://theme/icon-m-toolbar-settings-white")
                                   : (pressed ? "image://theme/icon-m-toolbar-settings-selected"
                                              : "image://theme/icon-m-toolbar-settings")
-                    onClicked: {
-                        pageStack.push(settingsPage);
-                    }
+                    onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
                 }
             }
         }
@@ -163,6 +161,7 @@ Page {
             color: (theme.inverted ? "white" : "black")
             width: parent.width
             height: 1
+            z: 1
         }
 
         Rectangle {
@@ -172,7 +171,7 @@ Page {
                 width: parent.width
                 height: 7
                 anchors.top: parent.top
-                z: 10
+                z: 1
 
                 gradient: Gradient {
                     GradientStop {color: "#99000000"; position: 0.0}
@@ -189,9 +188,6 @@ Page {
                 id: titlesView
                 spacing: 1
                 visible: searchField.text != ""
-
-                // We don't want the list to be visible under the search button/field when dragged.
-                clip: true
 
                 cacheBuffer: 400;
 
@@ -250,7 +246,6 @@ Page {
             }
         }
     }
-
 
     Timer {
         interval: 50

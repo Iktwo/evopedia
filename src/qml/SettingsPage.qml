@@ -3,7 +3,37 @@ import com.nokia.meego 1.0
 
 Page {
     id: settingsPage;
-    tools: settingsTools;
+    tools:
+        ToolBarLayout {
+            ToolIcon {
+                platformIconId: "toolbar-back";
+                onClicked: {
+                    pageStack.pop()
+                    searchPage.acquireFocus()
+                }
+            }
+            ToolIcon {
+                platformIconId: "toolbar-view-menu"
+                onClicked: settingsMenu.open()
+            }
+        }
+
+    AboutDialog {
+        id: aboutDialog
+    }
+
+    Menu {
+        id: settingsMenu
+        visualParent: pageStack
+        MenuLayout {
+            MenuItem {
+                text: qsTr("About")
+                onClicked: {
+                    aboutDialog.open();
+                }
+            }
+        }
+    }
 
     TitleBar{
         id: titleBar;
