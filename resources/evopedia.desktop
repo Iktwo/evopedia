@@ -4,7 +4,7 @@ Version=1.0
 Type=Application
 Terminal=false
 Name=Evopedia
-Exec=/usr/bin/invoker --single-instance --splash /usr/share/evopedia/splash.png --type=e -s /usr/bin/evopedia
+Exec=/usr/bin/invoker --single-instance --splash /usr/share/evopedia/splash.png --type=d -s /usr/bin/evopedia
 Icon=/usr/share/icons/hicolor/80x80/apps/evopedia.png
 Comment=Offline Wikipedia Reader
 X-Window-Icon=

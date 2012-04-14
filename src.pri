@@ -147,7 +147,10 @@ symbian {
 }
 
 unix {
-  LIBS += -lbz2
+  LIBS += -lbz2 -lmdeclarativecache
+  QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
+  QMAKE_LFLAGS += -rdynamic -pie
+
   #VARIABLES
   isEmpty(PREFIX) {
     PREFIX = /usr

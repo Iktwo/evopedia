@@ -22,7 +22,7 @@
 
 Q_DECLARE_METATYPE(QModelIndex)
 
-class HarmattanEvopediaApplication : public QApplication
+class HarmattanEvopediaApplication : public QObject
 {
     Q_OBJECT    
 
@@ -42,7 +42,8 @@ signals:
     void searchPrefixChanged();
 
 private:
-    QSharedPointer<QDeclarativeView> view;
+    QApplication* application;
+    QDeclarativeView* view;
 
     QSharedPointer<Evopedia> evopedia;
     QSharedPointer<EvopediaSettings> settings;

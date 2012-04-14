@@ -1,12 +1,13 @@
 #include "harmattanevopediaapplication.h"
+#include <applauncherd/MDeclarativeCache>
 
 HarmattanEvopediaApplication::HarmattanEvopediaApplication(int& argc, char** argv)
-    : QApplication(argc, argv),
-      view(new QDeclarativeView()),
+    : application(MDeclarativeCache::qApplication(argc, argv)),
+      view(MDeclarativeCache::qDeclarativeView()),
       evopedia(new Evopedia()),
       settings(new EvopediaSettings(evopedia.data())),
       languageListModel(new QStringListModelForQML("name")),
-      titleListModel(new TitleListModel()) {
+      titleListModel(new TitleListModel()){
 
     searchPrefix = "";
 
