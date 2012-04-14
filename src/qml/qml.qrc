@@ -15,5 +15,7 @@
         <file>ExtendedWebView.qml</file>
         <file>FlickableWebView.qml</file>
         <file>RadioListItem.qml</file>
+        <file>CustomTumblerButton.qml</file>
+        <file>qml_constants.js</file>
     </qresource>
 </RCC>

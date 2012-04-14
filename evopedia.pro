@@ -39,7 +39,9 @@ OTHER_FILES += \
     src/qml/ArticleView.qml \
     src/qml/FlickableWebView.qml \
     src/qml/ExtendedWebView.qml \
-    src/qml/RadioListItem.qml
+    src/qml/RadioListItem.qml \
+    src/qml/CustomTumblerButton.qml \
+    src/qml/qml_constants.js
 
 HEADERS += \
     src/bzlib.h \

@@ -26,7 +26,8 @@ public:
                NOTIFY languageIndexChanged)
 
     Q_PROPERTY(QStringList languageList
-               READ getLanguageList)
+               READ getLanguageList
+               CONSTANT)
 
     EvopediaSettings(Evopedia* evopedia);
 

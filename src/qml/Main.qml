@@ -6,6 +6,10 @@ PageStackWindow {
 
     initialPage: searchPage
 
+    property bool landscape: screen.rotation == 0
+
+    showStatusBar: !landscape
+
     SearchPage {
         id: searchPage
         Component.onCompleted: {

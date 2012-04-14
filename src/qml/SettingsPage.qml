@@ -12,14 +12,6 @@ Page {
         title: qsTr("Settings")
     }
 
-    Button{
-        id: btnLanguage
-        text: qsTr("Language")
-        onClicked: langDialog.open()
-        anchors.top: titleBar.bottom
-        anchors.topMargin: 10
-    }
-
     Label{
         id: lblTheme
         text: qsTr("Dark Theme")
@@ -31,7 +23,7 @@ Page {
         checked: evopediaSettings.darkTheme
         anchors.left: lblTheme.right
         anchors.leftMargin: 10
-        anchors.top: btnLanguage.bottom
+        anchors.top: titleBar.bottom
         anchors.topMargin: 10
         /*platformStyle: SwitchStyle {
             switchOn: "image://theme/color2-meegotouch-switch-on"
@@ -62,27 +54,6 @@ Page {
 
         onCheckedChanged: {
             evopediaSettings.useExternalBrowser = checked
-        }
-    }
-
-
-    SelectionDialog {
-        id: langDialog
-        titleText: qsTr("Language")
-
-        selectedIndex: evopediaSettings.languageIndex
-
-        model: ListModel { }
-
-        onAccepted: {
-            evopediaSettings.languageIndex = selectedIndex
-        }
-
-        Component.onCompleted: {
-            model.clear()
-            var i = 0;
-            for (i = 0; i < languageListModel.size; i++)
-                model.append({name: languageListModel.get(i)});
         }
     }
 }
